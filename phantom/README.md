@@ -2,11 +2,9 @@
 
 Welcome to our Phantom playbooks. These playbooks are ready for you to use, just import them into your phantom instance. 
 
-Most of these playbooks are keyed off of a Phantom Custom List. You can create custom lists under the playbooks page in Phantom. A custom list with the correct name and attributes will be provided with these playbooks. You will have to create the list manually on your instance. You are welcome to adjust these attributes as you see fit. Each playbook has more information in the 'Notes' section of the playbook settings. 
+Most of these playbooks are keyed off of a Phantom Custom List. You can create custom lists under the playbooks page in Phantom. A custom list with the correct name and attributes will be provided with these playbooks. You will have to create the list manually on your instance before importing the playbook. Documentation can be found in a README in the individual PB folders as well as the PB itself.
 
-When you import the playbook, be sure to adjust the playbook settings to your liking. All playbooks are set in draft mode and inactive. You will need to update the DomainTools creds asset, along with ensuring the playbook is connected to the custom list.
-
-The playbooks and custom lists are stored in a tar together. You will have to untar the file you download from this repo and import the playbook tar that comes out of it. Once you have it installed you can customize however you see fit. 
+When you import the playbook, be sure to adjust the playbook settings to your liking. All playbooks are set to inactive. You will need to update the DomainTools creds asset, along with ensuring the playbook is connected to the custom list.
 
 ### Current Playbooks In This Repo
 
