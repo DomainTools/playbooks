@@ -1,10 +1,6 @@
 ## DomainTools Phantom Playbooks
 
-Welcome to our Phantom playbooks. These playbooks are ready for you to use, just import them into your phantom instance. 
-
-Most of these playbooks are keyed off of a Phantom Custom List. You can create custom lists under the playbooks page in Phantom. A custom list with the correct name and attributes will be provided with these playbooks. You will have to create the list manually on your instance before importing the playbook. Documentation can be found in a README in the individual PB folders as well as the PB itself.
-
-When you import the playbook, be sure to adjust the playbook settings to your liking. All playbooks are set to inactive. You will need to update the DomainTools creds asset, along with ensuring the playbook is connected to the custom list.
+Playbooks and automation scripts for Splunk Phantom.
 
 ### Current Playbooks In This Repo
 
