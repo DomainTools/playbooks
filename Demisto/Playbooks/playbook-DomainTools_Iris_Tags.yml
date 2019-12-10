@@ -31,10 +31,10 @@ tasks:
     ignoreworker: false
   "1":
     id: "1"
-    taskid: d70682ce-8615-4999-8295-1baeb9e31383
+    taskid: b85ab0d0-592d-4eee-8c7e-905fcfe69a4c
     type: regular
     task:
-      id: d70682ce-8615-4999-8295-1baeb9e31383
+      id: b85ab0d0-592d-4eee-8c7e-905fcfe69a4c
       version: -1
       name: CheckTags
       description: Check DomainTools domain tags and if a tag is found mark incident
@@ -50,7 +50,7 @@ tasks:
       domain:
         simple: ${inputs.domain}
       domain_tags:
-        simple: ${DomainTools.Domains.Analytics.Tags}
+        simple: ${inputs.domain_tags}
       incident_id:
         simple: ${incident.id}
       malicious_tags:
@@ -91,10 +91,10 @@ tasks:
     ignoreworker: false
   "3":
     id: "3"
-    taskid: 11f91fd6-1b9b-4230-8035-4689fa484d80
+    taskid: b5deb259-ef11-4315-8ce8-bc19986c8d67
     type: condition
     task:
-      id: 11f91fd6-1b9b-4230-8035-4689fa484d80
+      id: b5deb259-ef11-4315-8ce8-bc19986c8d67
       version: -1
       name: Check Domain has Tags
       type: condition
@@ -113,7 +113,7 @@ tasks:
       - - operator: isExists
           left:
             value:
-              simple: ${DomainTools.Domains.Analytics.Tags}
+              simple: inputs.domain_tags
             iscontext: true
     view: |-
       {
@@ -137,7 +137,12 @@ view: |-
       }
     }
   }
-inputs: []
+inputs:
+- key: domain_tags
+  value:
+    simple: ${DomainTools.Domains.Analytics.Tags}
+  required: false
+  description: ""
 outputs:
 - contextPath: domain
   description: domain
