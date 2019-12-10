@@ -6,10 +6,10 @@ description: ""
 tasks:
   "0":
     id: "0"
-    taskid: 054f7e8b-f04d-4ff1-8155-f4ce8b431336
+    taskid: 1d7e431e-9f49-4a0b-87be-51b6f41e6ee6
     type: start
     task:
-      id: 054f7e8b-f04d-4ff1-8155-f4ce8b431336
+      id: 1d7e431e-9f49-4a0b-87be-51b6f41e6ee6
       version: -1
       name: ""
       iscommand: false
@@ -17,7 +17,7 @@ tasks:
       description: ""
     nexttasks:
       '#none#':
-      - "2"
+      - "6"
     separatecontext: false
     view: |-
       {
@@ -31,10 +31,10 @@ tasks:
     ignoreworker: false
   "2":
     id: "2"
-    taskid: 301e4834-b0d5-48e9-8d26-9a146438225b
+    taskid: bef65bdc-1cdf-4ea1-8cc0-ad2ae2f9c78b
     type: condition
     task:
-      id: 301e4834-b0d5-48e9-8d26-9a146438225b
+      id: bef65bdc-1cdf-4ea1-8cc0-ad2ae2f9c78b
       version: -1
       name: Do New Domain Enrichment?
       scriptName: CheckLastEnrichment
@@ -44,7 +44,7 @@ tasks:
       description: ""
     nexttasks:
       "no":
-      - "5"
+      - "3"
       "yes":
       - "4"
     scriptarguments:
@@ -54,8 +54,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 440,
-          "y": 410
+          "x": 180,
+          "y": 390
         }
       }
     note: false
@@ -63,10 +63,10 @@ tasks:
     ignoreworker: false
   "3":
     id: "3"
-    taskid: 582dcff7-1873-464f-8835-449a49074dd0
+    taskid: 955a1960-17dc-44f1-8d00-27acf25e643f
     type: regular
     task:
-      id: 582dcff7-1873-464f-8835-449a49074dd0
+      id: 955a1960-17dc-44f1-8d00-27acf25e643f
       version: -1
       name: Add to Indicator Table
       scriptName: SetIndicatorTableData
@@ -86,8 +86,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 220,
-          "y": 850
+          "x": 210,
+          "y": 860
         }
       }
     note: false
@@ -95,10 +95,10 @@ tasks:
     ignoreworker: false
   "4":
     id: "4"
-    taskid: 78627b98-80cf-42e6-8244-17e499789994
+    taskid: 6c882f2a-e8ab-47e4-8a32-2db3ae436b7c
     type: regular
     task:
-      id: 78627b98-80cf-42e6-8244-17e499789994
+      id: 6c882f2a-e8ab-47e4-8a32-2db3ae436b7c
       version: -1
       name: Enrich Domain
       script: DomainTools Iris|||domain
@@ -121,8 +121,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 220,
-          "y": 670
+          "x": -50,
+          "y": 640
         }
       }
     note: false
@@ -130,10 +130,10 @@ tasks:
     ignoreworker: false
   "5":
     id: "5"
-    taskid: dbe4c15c-d34e-4712-8155-23c2010c34f9
+    taskid: 244d3a63-472e-40d6-82cd-79553ac42497
     type: title
     task:
-      id: dbe4c15c-d34e-4712-8155-23c2010c34f9
+      id: 244d3a63-472e-40d6-82cd-79553ac42497
       version: -1
       name: Done
       type: title
@@ -144,8 +144,47 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 430,
+          "x": 440,
           "y": 1160
+        }
+      }
+    note: false
+    timertriggers: []
+    ignoreworker: false
+  "6":
+    id: "6"
+    taskid: a30c3455-1aba-45b4-8bb9-63e47866147d
+    type: condition
+    task:
+      id: a30c3455-1aba-45b4-8bb9-63e47866147d
+      version: -1
+      name: Does the Domain context data exist?
+      type: condition
+      iscommand: false
+      brand: ""
+    nexttasks:
+      '#default#':
+      - "5"
+      "yes":
+      - "2"
+    separatecontext: false
+    conditions:
+    - label: "yes"
+      condition:
+      - - operator: isExists
+          left:
+            value:
+              complex:
+                root: ${DomainTools
+                accessor: Domains}
+                transformers:
+                - operator: uniq
+            iscontext: true
+    view: |-
+      {
+        "position": {
+          "x": 450,
+          "y": 210
         }
       }
     note: false
@@ -157,8 +196,8 @@ view: |-
     "paper": {
       "dimensions": {
         "height": 1175,
-        "width": 610,
-        "x": 220,
+        "width": 880,
+        "x": -50,
         "y": 50
       }
     }
