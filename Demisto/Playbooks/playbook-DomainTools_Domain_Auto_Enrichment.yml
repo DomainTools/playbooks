@@ -31,10 +31,10 @@ tasks:
     ignoreworker: false
   "2":
     id: "2"
-    taskid: bef65bdc-1cdf-4ea1-8cc0-ad2ae2f9c78b
+    taskid: b26fad07-5ecc-493c-8531-036dd6dcd09b
     type: condition
     task:
-      id: bef65bdc-1cdf-4ea1-8cc0-ad2ae2f9c78b
+      id: b26fad07-5ecc-493c-8531-036dd6dcd09b
       version: -1
       name: Do New Domain Enrichment?
       scriptName: CheckLastEnrichment
@@ -54,8 +54,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 180,
-          "y": 390
+          "x": -50,
+          "y": 450
         }
       }
     note: false
@@ -86,8 +86,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": 210,
-          "y": 860
+          "x": 80,
+          "y": 1040
         }
       }
     note: false
@@ -121,8 +121,8 @@ tasks:
     view: |-
       {
         "position": {
-          "x": -50,
-          "y": 640
+          "x": -650,
+          "y": 830
         }
       }
     note: false
@@ -153,10 +153,10 @@ tasks:
     ignoreworker: false
   "6":
     id: "6"
-    taskid: a30c3455-1aba-45b4-8bb9-63e47866147d
+    taskid: bfdd98c7-ab36-402d-8ae7-a04dc425420d
     type: condition
     task:
-      id: a30c3455-1aba-45b4-8bb9-63e47866147d
+      id: bfdd98c7-ab36-402d-8ae7-a04dc425420d
       version: -1
       name: Does the Domain context data exist?
       type: condition
@@ -175,8 +175,8 @@ tasks:
           left:
             value:
               complex:
-                root: ${DomainTools
-                accessor: Domains}
+                root: ${Domain
+                accessor: Name}
                 transformers:
                 - operator: uniq
             iscontext: true
@@ -196,8 +196,8 @@ view: |-
     "paper": {
       "dimensions": {
         "height": 1175,
-        "width": 880,
-        "x": -50,
+        "width": 1480,
+        "x": -650,
         "y": 50
       }
     }
