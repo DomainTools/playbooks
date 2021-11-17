@@ -1,11 +1,10 @@
-## DomainTools Phantom Playbooks
+## DomainTools Splunk SOAR Playbooks
 
-Working playbooks and automation scripts for Splunk Phantom. 
+Working playbooks and automation scripts for Splunk SOAR. 
 
 #### Installation
 For the DomainTools playbooks in this repo, an asset called `domaintoolsiriscreds` is needed with
 DomainTools API username and key. The playbooks expect this asset to exist to make the API calls needed for the playbook data upon execution. Installation instructions for each playbook is in the README at the root of the playbook’s directory.
-<br>
 
 #### Current Playbooks In This Repo
 
