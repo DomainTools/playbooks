@@ -11,15 +11,15 @@ DomainTools API username and key. The playbooks expect this asset to exist to ma
 
 ##### DomainTools Domain Risk Score
 
-Get the Domain Risk Score and throw an Alert for the Analyst to manually review the domain artifact. Users can block the domain.
+Get the Domain Risk Score and throw an Alert for the Analyst to manually review the domain artifact. Users can block the domain. It supports `destinationDnsDomain` and `domain` input parameters.
 
 ##### DomainTools Guided Pivots
 
-Retrieve the Iris Investigate profile of the domain and automatically identify potential connected infrastructure related to artifacts based on DomainTools Guided Pivot value. The pivot value is set to 200 and can be tailored per investigation objectives.
+Retrieve the Iris Investigate profile of the domain and automatically identify potential connected infrastructure related to artifacts based on DomainTools Guided Pivot value. The pivot value is set to 200 and can be tailored per investigation objectives. It supports `destinationDnsDomain` and `domain` input parameters.
 
 ##### DomainTools Iris Malicious Tags
 
-Retrieve the Iris Investigate profile of a domain and automatically flag domains that have been tagged as malicious in DomainTools Iris. The list of malicious tags are configurable by the analyst and can be kept up to date for automation.
+Retrieve the Iris Investigate profile of a domain and automatically flag domains that have been tagged as malicious in DomainTools Iris. The list of malicious tags are configurable by the analyst and can be kept up to date for automation. It supports `destinationDnsDomain` and `domain` input parameters.
 
 #### Third party made playbooks, that work with DomainTools data
 

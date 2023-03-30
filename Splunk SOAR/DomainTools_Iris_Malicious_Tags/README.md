@@ -4,7 +4,7 @@ Retrieve the Iris Investigate profile of a domain and automatically flag domains
 
 #### DomainTools API Asset
 
-**The DomainTools playbooks in this repo will require an asset called `domaintoolscreds`** for a DomainTools API username and key. This asset is used to retrieve DomainTools data via the DomainTools API during playbook execution.
+**The DomainTools playbooks in this repo will require an asset called `domaintoolscreds`** for a DomainTools API username and key. This asset is used to retrieve DomainTools data via the DomainTools API during playbook execution. It supports `destinationDnsDomain` and `domain` input parameters.
 <br>
 
 #### Before Installing
