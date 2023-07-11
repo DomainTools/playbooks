@@ -19,7 +19,7 @@ Download each of the tar files in this directory and import the playbooks using 
 
 #### Getting Started
 
-* Iris Enrich Batch Add - Run this playbook on an event to add it's artifacts to the `Iris Enrich Batch Queue` custom list.
-* Iris Enrich Batch Process - Run this playbook to enrich all artifacts in the `Iris Enrich Batch Queue` custom list in one batch.
+* Iris Enrich Batch Add Domains - Run this playbook on an event to add it's artifacts to the `Iris Enrich Batch Queue` custom list.
+* Iris Enrich Batch Process Domains - Run this playbook to enrich all artifacts in the `Iris Enrich Batch Queue` custom list in one batch.
 * Iris Enrich Clear Queue - Run this playbook to clear the `Iris Enrich Batch Queue` custom list when Iris Enrich is completed.
 * Iris Enrich Batch Example - This example shows how to combine the `Iris Enrich Batch Process` and `Iris Enrich Clear Queue` playbooks after using the Iris Enrich batch results to alert any high risk domains.  
