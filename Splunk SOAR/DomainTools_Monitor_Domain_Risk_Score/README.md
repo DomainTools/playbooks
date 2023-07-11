@@ -25,3 +25,8 @@ Go into Administration > Event Settings > Label Settings then add new label with
 The playbook will now run every time the Timer app creates on of these events, and will execute according to your schedule. 
 
 Reference: _https://community.splunk.com/t5/Splunk-SOAR-f-k-a-Phantom/How-to-schedule-a-Phantom-playbook-to-run-at-specific-intervals/m-p/500565_
+
+### How-to Videos
+How to setup/use the playbook: https://www.loom.com/share/c1694449a1e340b2b1df4aaba1ee214b?sid=aa74e89d-2bc1-4076-8472-37cc6bd960f0
+
+How to run the playbook base on a schedule/interval: https://www.loom.com/share/888c088c31594732a5d3cff54f10243a?sid=c9a42e35-9e71-40f4-adc8-0a8c878c1922
