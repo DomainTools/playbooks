@@ -1,4 +1,5 @@
-microsoftwindows.xyz,None,None
-helpmanageaccounts.com,None,None
-lzbeifang.com,None,None
-cisoasaservices.com,None,None
+domain_name,prev_risk_score,current_risk_score
+lzbeifang.com,,
+cisoasaservices.com,,
+microsoftwindows.xyz,,
+helpmanageaccounts.com,,
