@@ -26,6 +26,30 @@ This playbook accepts 5 parameters.
 | parsed_dnsdb_rrset_lookup_result |             | The parsed result from dnsdb rrset lookup. |
 | output_file_name                 | `file name` | The filename of the html output            |
 
+#### Sample parsed_dnsdb_rrset_lookup_result schema
+```
+[
+    {
+        "dt_domain": "string",
+        "data": [
+            {
+                "count": 0,
+                "rdata": [
+                    "string",
+                    "string"
+                ],
+                "rrname": "string",
+                "rrtype": "string",
+                "bailiwick": "string",
+                "time_last": 0,
+                "time_first": "string"
+            },
+        ],
+        "count": 0
+    }
+]
+```
+
 #### Installation
 
 Download the tar file in this directory and import the playbook using that file. The asset accessed in the playbook is for DNSDB Farsight API credentials. Call the playbook to your main playbook, make sure it's active, and give it a shot.
