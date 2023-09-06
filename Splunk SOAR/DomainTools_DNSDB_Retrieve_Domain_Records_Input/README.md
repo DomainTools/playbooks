@@ -14,10 +14,10 @@ This playbook accepts 5 parameters.
 | Name                  | Data Type | Description                                                      |
 |-----------------------|-----------|------------------------------------------------------------------|
 | dt_domain             | `domain`  | The domain to lookup.                                            |
-| subdomain_only        |           | Flag results for subdomain only. Use True or False as value.     |
-| time_first_after      |           | Record first seen after (in epoch sec). Default is 10 days ago.  |
+| subdomain_only        |           | Flag results for subdomain only. Use True or False as value. Default is False.     |
+| time_first_after      |           | Filter for Records first seen after (epoch seconds, relative seconds e.g. -3153600, or UTC timestamp e.g. 2021-01-05T12:06:02Z). Defaults to 6 hours ago (-21600)  |
 | limit                 |           | The query limit. Default is 500                                  |
-| output_result_to_html |           | Creates a HTML result in the current container. Default is True. |
+| output_result_to_html |           | 	Creates a HTML result in the current container. Use True or False as value. Default is True. |
 
 #### Playbook Output
 
