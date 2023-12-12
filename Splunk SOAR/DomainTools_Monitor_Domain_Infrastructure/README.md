@@ -4,7 +4,7 @@ Retrieves the infrastructure details for a domain and stores it in a custom list
 
 #### DomainTools API Asset
 
-**The DomainTools playbooks in this repo will require an asset called `domaintoolscreds`** for a DomainTools API username and key. This asset is used to retrieve DomainTools data via the DomainTools API during playbook execution. 
+**The DomainTools playbooks in this repo will require an asset called `domaintoolscreds`** for a DomainTools API username and key. This asset is used to retrieve DomainTools data via the DomainTools API during playbook execution.
 <br>
 
 #### Before Installing
@@ -16,10 +16,3 @@ In this directory there is a csv called `domaintools_monitored_domain_infrastruc
 #### Installation
 
 Download the tar file in this directory and import the playbook using that file. The asset accessed in the playbook is for DomainTools API credentials. Point the playbook to the `domaintoolscreds` asset, save the playbook, make sure it's active, and give it a shot.
-
-
-#### Scheduling
-Go into Administration > Event Settings > Label Settings then add new label with a meaningful name like "run_every_30mins". Go to Apps > search for the splunk Timer app > configure new asset > Ingest Settings > Set it to run on the appropriate schedule(in this case, 30minutes) > Set the 'Label to Apply' to be the label added above in Administration. In your playbook settings, set the "Operatos On" value to also be "run_every_30mins". 
-The playbook will now run every time the Timer app creates one of these events, and will execute according to your schedule. 
-
-Reference: _https://community.splunk.com/t5/Splunk-SOAR-f-k-a-Phantom/How-to-schedule-a-Phantom-playbook-to-run-at-specific-intervals/m-p/500565_
