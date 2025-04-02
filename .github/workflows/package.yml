@@ -42,7 +42,7 @@ jobs:
             parent_folder=$(echo "$dir" | cut -d'/' -f3)
             sub_folder=$(echo "$dir" | cut -d'/' -f4)
 
-            echo "Category: category_folder, Parent: $parent_folder, Sub-folder: $sub_folder"
+            echo "Category: $category_folder, Parent: $parent_folder, Sub-folder: $sub_folder"
 
             mkdir -p "packaged_playbooks/$category_folder/$parent_folder"
             echo "Created directory: packaged_playbooks/$category_folder/$parent_folder"
