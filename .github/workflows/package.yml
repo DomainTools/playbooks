@@ -1,0 +1,74 @@
+name: Auto packager of SOAR playbooks
+
+on:
+  push:
+    branches:
+      - main  # only package the app in the `main` branch
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2  # Fetch last commit for comparison
+
+      - name: Detect changed playbook directories
+        id: changed_dirs
+        run: |
+          # Find modified directories inside src/ and extract their full paths
+          CHANGED_DIRS=$(git diff --name-only HEAD~1 HEAD src/ | awk -F'/' '$3 == "playbooks" {print $1"/"$2"/"$3"/"$4}' | sort -u | uniq | sed 's/^/"/;s/$/"/' | tr '\n' ' ')
+          if [[ -z "$CHANGED_DIRS" ]]; then
+            echo "No changes detected in src/."
+            echo "changed_dirs=" >> $GITHUB_ENV
+          else
+            echo "Changed directories: $CHANGED_DIRS"
+            echo "changed_dirs=$CHANGED_DIRS" >> $GITHUB_ENV
+          fi
+
+      - name: Package changed playbooks
+        if: env.changed_dirs != null && env.changed_dirs != ''
+        run: |
+          for dir in ${{ env.changed_dirs }}; do
+            echo "Packaging: $dir"
+            category_folder=$(echo "$dir" | cut -d'/' -f2)
+            parent_folder=$(echo "$dir" | cut -d'/' -f3)
+            sub_folder=$(echo "$dir" | cut -d'/' -f4)
+
+            echo "Category: $category_folder, Parent: $parent_folder, Sub-folder: $sub_folder"
+
+            mkdir -p "packaged_playbooks/$category_folder/$parent_folder"
+            echo "Created directory: packaged_playbooks/$category_folder/$parent_folder"
+
+            tar -czvf "packaged_playbooks/$category_folder/$parent_folder/${sub_folder}.tgz" -C "src/$category_folder/$parent_folder" "$sub_folder" || echo "Tar failed!"
+            echo "Packaged $dir/ -> packaged_playbooks/$category_folder/$parent_folder/${sub_folder}.tgz"
+          done
+
+          echo "Checking packaged files..."
+          ls -R packaged_playbooks/
+
+      - name: Commit and push packaged playbooks
+        if: env.changed_dirs != null && env.changed_dirs != '' && github.event_name != 'pull_request' # only commit and push if it's not a PR
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config --global user.name "dt-playbook-bot"
+          git config --global user.email "dt-playbook-bot@users.noreply.github.com"
+
+          git add packaged_playbooks/
+          git commit -m "Auto-package updated playbooks [dt-playbook-bot]" || echo "No changes to commit."
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git main || echo "No changes to push."
+
+      - name: Upload packaged playbooks
+        if: env.changed_dirs != null && env.changed_dirs != '' && github.event_name != 'pull_request' # only commit and push if it's not a PR
+        uses: actions/upload-artifact@v4
+        with:
+          name: packaged-playbooks
+          path: packaged_playbooks/**/*
