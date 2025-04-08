@@ -1,6 +1,36 @@
 # DomainTools Splunk SOAR Playbooks
 
-Working playbooks and automation scripts for Splunk SOAR.
+Working playbooks for Splunk SOAR.
+
+## How to Contribute
+
+1. Export the DomainTools Splunk SOAR playbook of your choice in the Splunk SOAR UI.
+2. Create a new folder (if new playbook) with the same name of the compressed file version of the playbook.
+
+    `e.g. DomainTools_Domain_Risk_Score.tgz > Splunk SOAR/DomainTools_Domain_Risk_Score/`
+
+3. Unzipped the compressed version (make sure you have the original copy of .tgz file after unzipping it.)
+4. Copy all the source code to the src/ directory for diff purposes.
+
+    `e.g. DomainTools_Domain_Risk_Score.tgz > Splunk SOAR/DomainTools_Domain_Risk_Score/src/`
+
+5. The exported compressed version of the playbook should be placed in `Splunk SOAR/<your_playbook_name>/<exported_compressed_version_of_the_playbook>.tgz` directory.
+
+    `e.g. Splunk SOAR/DomainTools_Domain_Risk_Score/DomainTools_Domain_Risk_Score.tgz`
+
+6. The playbook directory structure should be:
+
+    ```bash
+        ├── Splunk SOAR
+        │   ├── DomainTools_Domain_Risk_Score
+        │   │   ├── DomainTools_Domain_Risk_Score.tgz
+        │   │   ├── src/
+        │   │   │   ├──  DomainTools_Domain_Risk_Score.py
+        │   │   │   ├──  DomainTools_Domain_Risk_Score.json
+        │   │   ├── README.md
+    ```
+
+7. After finalizing the changes, commit & push the changes.
 
 ## Installation
 

@@ -1,4 +1,4 @@
-## DomainTools Playbooks
+# DomainTools Playbooks
 
 Playbooks and automation scripts for SOAR applications that automate incident response activities by utilizing DomainTools intelligence.
 
