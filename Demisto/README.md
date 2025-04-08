@@ -1,1 +1,0 @@
-To use the DomainTools Demisto playbooks, please upload the playbooks into your Demisto instance as well as the unified yaml automation scripts.

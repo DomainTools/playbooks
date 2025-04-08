@@ -1,25 +1,61 @@
-## DomainTools Splunk SOAR Playbooks
+# DomainTools Splunk SOAR Playbooks
 
 Working playbooks and automation scripts for Splunk SOAR.
 
-#### Installation
+## Installation
 
 For the DomainTools playbooks in this repo, an asset called `domaintoolscreds` is needed with
 DomainTools API username and key. The playbooks expect this asset to exist to make the API calls needed for the playbook data upon execution. Installation instructions for each playbook is in the README at the root of the playbook’s directory.
 
-#### Current Playbooks In This Repo
+### Current Playbooks In This Repo
 
-##### DomainTools Domain Risk Score
+#### DomainTools Domain Risk Score
 
 Get the Domain Risk Score and throw an Alert for the Analyst to manually review the domain artifact. Users can block the domain. It supports `destinationDnsDomain` and `domain` input parameters.
 
-##### DomainTools Guided Pivots
+#### DomainTools Guided Pivots
 
 Retrieve the Iris Investigate profile of the domain and automatically identify potential connected infrastructure related to artifacts based on DomainTools Guided Pivot value. The pivot value is set to 200 and can be tailored per investigation objectives. It supports `destinationDnsDomain` and `domain` input parameters.
 
-##### DomainTools Iris Malicious Tags
+#### DomainTools Iris Malicious Tags
 
 Retrieve the Iris Investigate profile of a domain and automatically flag domains that have been tagged as malicious in DomainTools Iris. The list of malicious tags are configurable by the analyst and can be kept up to date for automation. It supports `destinationDnsDomain` and `domain` input parameters.
+
+#### DomainTools Alerting Playbook - Check Domain Risk Score
+
+This playbook call iris ivestigate api with a given `tag`. Check active domains with high risk score then alerts user and outputs all high risk domains in a csv file.
+
+#### DomainTools Alerting Playbook - New Domains
+
+This playbook retrieves domain in Iris Investigate from a given search hash with built-in `first_seen` param. The flow will continue to retrieve new domains based on the scheduled run.
+
+#### DomainTools Monitor Domain Infrastructure
+
+Retrieves the infrastructure details for a domain and stores it in a custom list. The flow will continue to monitor the domain for changes to the risk score based on the run schedule.
+
+#### DomainTools Monitor Domain Risk Score
+
+Retrieves the risk score for a domain and stores it in configurable custom list. The flow will continue to monitor the domain for changes to the risk score based on the run schedule.
+
+#### DomainTools Monitor Domain Search Hash
+
+This playbook retrieves domains from a given hash and imports it to an artifact. The flow will continue to monitor the domain for changes to the risk score based on the run schedule.
+
+#### DomainTools Feeds Domain Discovery
+
+This playbook retrieves newly observed domains from DomainTools Real Time Unified Feeds from a given `sessionID`, `before`, and/or `after` params. It will save the Domain Discovery list in a csv file with naming convention - `domaintools_feed_domain_discovery_<YYYYMMDD>_<hhmmss>.csv`. The flow will continue to retrieve NOD feeds based on the scheduled run.
+
+#### DomainTools Feeds Newly Active Domains (NAD)
+
+This playbook retrieves newly active domains from DomainTools Real Time Unified Feeds from a given `sessionID`, `before`, and/or `after` params. It will save the NAD list in a csv file with naming convention - `domaintools_feed_nad_<YYYYMMDD>_<hhmmss>.csv`. The flow will continue to retrieve NAD feeds based on the scheduled run.
+
+#### DomainTools Feeds Newly Observe Domains (NOD)
+
+This playbook retrieves newly observed domains from DomainTools Real Time Unified Feeds from a given `sessionID`, `before`, and/or `after` params. It will save the NOD list in a csv file with naming convention - `domaintools_feed_nod_<YYYYMMDD>_<hhmmss>.csv`. The flow will continue to retrieve NOD feeds based on the scheduled run.
+
+#### DomainTools Feeds Parsed Domain RDAP
+
+This playbook retrieves newly observed domains from DomainTools Real Time Unified Feeds from a given `sessionID`, `before`, and/or `after` params. It will save the Parsed Domain RDAP list in a csv file with naming convention - `domaintools_feed_parsed_domain_rdap_<YYYYMMDD>_<hhmmss>.csv`. The flow will continue to retrieve NOD feeds based on the scheduled run.
 
 #### Third party made playbooks, that work with DomainTools data
 
