@@ -1,0 +1,407 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Scheduled Playbook",
+    "coa": {
+        "data": {
+            "description": "This playbook retrieves the infrastructure details for a domain and stores it in a custom list. The flow will continue to monitor the domain for changes to the infrastructure based on the run schedule.",
+            "edges": [
+                {
+                    "id": "port_2_to_port_3",
+                    "sourceNode": "2",
+                    "sourcePort": "2_out",
+                    "targetNode": "3",
+                    "targetPort": "3_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_6_to_port_7",
+                    "sourceNode": "6",
+                    "sourcePort": "6_out",
+                    "targetNode": "7",
+                    "targetPort": "7_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_6_to_port_1",
+                    "sourceNode": "6",
+                    "sourcePort": "6_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_7_to_port_8",
+                    "sourceNode": "7",
+                    "sourcePort": "7_out",
+                    "targetNode": "8",
+                    "targetPort": "8_in"
+                },
+                {
+                    "id": "port_7_to_port_9",
+                    "sourceNode": "7",
+                    "sourcePort": "7_out",
+                    "targetNode": "9",
+                    "targetPort": "9_in"
+                },
+                {
+                    "id": "port_8_to_port_1",
+                    "sourceNode": "8",
+                    "sourcePort": "8_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_9_to_port_11",
+                    "sourceNode": "9",
+                    "sourcePort": "9_out",
+                    "targetNode": "11",
+                    "targetPort": "11_in"
+                },
+                {
+                    "id": "port_11_to_port_1",
+                    "sourceNode": "11",
+                    "sourcePort": "11_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_0_to_port_2",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
+                },
+                {
+                    "id": "port_4_to_port_6",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "6",
+                    "targetPort": "6_in"
+                },
+                {
+                    "id": "port_3_to_port_4",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "4",
+                    "targetPort": "4_in"
+                }
+            ],
+            "hash": "3062106d36330a37ae54f8ba9f9106174fdbc363",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "warnings": {},
+                    "x": 40,
+                    "y": -6.394884621840902e-14
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "warnings": {},
+                    "x": -1.4210854715202004e-14,
+                    "y": 1280
+                },
+                "11": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Output to HTML",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 7,
+                        "functionName": "output_to_html",
+                        "id": "11",
+                        "inputParameters": [
+                            "merge_results:custom_function:context_data",
+                            "check_for_changed_domains:custom_function:file_name"
+                        ],
+                        "outputVariables": [],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "11",
+                    "type": "code",
+                    "userCode": "    \n    # Write your custom code here...\n    phantom.debug(\"rendering template\")\n    html_body = phantom.render_template(\n        \"\"\"\n<html>\n<head>\n  <meta http-equiv='X-UA-Compatible' content='IE=edge'>\n  <title>Summary Report</title>\n  <meta name='viewport' content='width=device-width, initial-scale=1'>\n  <style>\n    html, body {\n      margin: 0;\n      padding: 0;\n      font-family: \"Lucida Console\", Courier, monospace;\n      font-size: 14px;\n    }\n\n    table, th, td {\n      border: 1px solid black;\n      border-collapse: collapse;\n    }\n\n    .wrapper {\n      width: 60%;\n      \n      padding: 10px;\n    }\n    p {\n      margin: 7px 0 0 2px;\n    }\n    .content {\n      display: flex;\n      justify-content: space-between;\n      margin: 10px 5px 5px 2px;\n    }\n    .left {\n      width: 40%;\n    }\n    .right {\n      width: 60%;\n    }\n    \n  </style>\n</head>\n<body>\n  <div class=\"wrapper\">\n    <table style=\"width: 100%;\">\n      <tr style = \"background-color: #007abd;color:white;\">\n        <th style=\"width:20%;color:white;\">Domain</th>\n        <th colspan=\"2\" style=\"width:40%;color:white;\">Previous Value</th>\n        <th colspan=\"2\" style=\"width:40%;color:white;\">Current Value</th>\n      </tr>\n      {% for result in results%}\n        <tr>\n          <td><p style=\"text-align:center; margin:0;\">{{ result.domain }}</p></td>\n          <!-- Previous Value Column -->\n          <td colspan=\"2\">\n            {% for key, val in result.prev.items %}\n              {% if key in result.list_keys%}\n                {% if key == \"asn\" %}\n                  <div class=\"content\">\n                    <div class=\"left\">\n                      ASN:\n                    </div>\n                    <div class=\"right\">\n                      <span style=\"display: inline-block;\"> {{ val }} </span>\n                    </div>\n                  </div>\n                {% else %}\n                  <div class=\"content\">\n                    <div class=\"left\">\n                      {{ key | title }}:\n                    </div>\n                    <div class=\"right\">\n                      {% if val %}\n                        {% for item in val %}\n                          {% for k,v in item.items %}\n                            {% if 'value' in v %}\n                                <span style=\"display: inline-block;\">{{ k | title }}: {{ v.value }} </span>\n                            {% else %}\n                                {% if v.0.value %}\n                                  <span style=\"display: inline-block;\">{{ k | upper }}: {{ v.0.value }}</span>\n                                {% else %}\n                                  <br><span style=\"display: inline-block;\">{{ k | title }}: {{ v }}</span>\n                                {% endif %}\n                            {% endif %}\n                          {% endfor %}\n                        {% endfor %}\n                      {% else %}\n                        <span style=\"display: inline-block;\">No Data Found.</span>\n                      {% endif %}\n                    </div>\n                  </div>\n                {% endif %}\n              {% else %}\n                 <div class=\"content\">\n                    <div class=\"left\">\n                      {{ key | title }}:\n                    </div>\n                    <div class=\"right\">\n                      {% if val %}\n                        <span style=\"display: inline-block;\"> {{ val.value }} </span>\n                      {% else %}\n                        <span style=\"display: inline-block;\"> No Data Found. </span>\n                      {% endif %}\n                    </div>\n                  </div>\n              {% endif %}\n            {% endfor %}\n          </td>\n          <!-- Current Value Column -->\n          <td colspan=\"2\">\n            {% for key, val in result.current.items %}\n              {% if key in result.list_keys%}\n                {% if key == \"asn\" %}\n                  <div class=\"content\">\n                    <div class=\"left\">\n                      ASN:\n                    </div>\n                    <div class=\"right\">\n                      <span style=\"display: inline-block;\"> {{ val }} </span>\n                    </div>\n                  </div>\n                {% else %}\n                  <div class=\"content\">\n                    <div class=\"left\">\n                      {{ key | title }}:\n                    </div>\n                    <div class=\"right\">\n                      {% if val %}\n                        {% for item in val %}\n                          {% for k,v in item.items %}\n                            {% if 'value' in v %}\n                                <span style=\"display: inline-block;\">{{ k | title }}: {{ v.value }} </span>\n                            {% else %}\n                                {% if v.0.value %}\n                                  <span style=\"display: inline-block;\">{{ k | upper }}: {{ v.0.value }}</span>\n                                {% else %}\n                                  <br><span style=\"display: inline-block;\">{{ k | title }}: {{ v }}</span>\n                                {% endif %}\n                            {% endif %}\n                          {% endfor %}\n                        {% endfor %}\n                      {% else %}\n                        <span style=\"display: inline-block;\">No Data Found.</span>\n                      {% endif %}\n                    </div>\n                  </div>\n                {% endif %}\n              {% else %}\n                 <div class=\"content\">\n                    <div class=\"left\">\n                      {{ key | title }}:\n                    </div>\n                    <div class=\"right\">\n                      {% if val %}\n                        <span style=\"display: inline-block;\"> {{ val.value }} </span>\n                      {% else %}\n                        <span style=\"display: inline-block;\"> No Data Found. </span>\n                      {% endif %}\n                    </div>\n                  </div>\n              {% endif %}\n            {% endfor %}\n          </td>\n        </tr>\n      {% endfor %}\n    </table>\n  </div>\n</body>\n</html>\n\n        \"\"\",\n        {\n            'results': merge_results__context_data,\n        }\n    )\n    code_1__html_template = html_body\n    html_to_string = \"\".join([html_body])\n    #phantom.debug(html_to_string)\n    \n    phantom.debug(\"dt debug - done rendering template\")\n    ### write to the vault\n    # create a file name\n    from datetime import datetime\n    file_name = check_for_changed_domains__file_name\n    # create a tmp file\n    with open(f\"/opt/phantom/vault/tmp/{file_name}\", \"w\") as report_file:\n        report_file.write(html_to_string)\n    # write the html to a pdf at the tempfile location\n    #if phantom.html_string_to_pdf(html_body, tf.name):\n    phantom.vault_add(container=container, file_location=f\"/opt/phantom/vault/tmp/{file_name}\", file_name=file_name)\n\n",
+                    "warnings": {},
+                    "x": 240,
+                    "y": 1116
+                },
+                "2": {
+                    "customCode": null,
+                    "data": {
+                        "advanced": {
+                            "customName": "Get Monitored Infrastructure List",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "get_monitored_infrastructure_list",
+                        "id": "2",
+                        "inputParameters": [],
+                        "outputVariables": [
+                            "monitored_domain_infra_list",
+                            "monitored_domain_infra_list_count"
+                        ],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "2",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here... \n    _, _, monitored_domain_infra_list = phantom.get_list(list_name='domaintools_monitored_domain_infrastructure')\n    get_monitored_infrastructure_list__monitored_domain_infra_list = monitored_domain_infra_list[1:] # ignore the first row as it is the header\n    get_monitored_infrastructure_list__monitored_domain_infra_list_count = len(monitored_domain_infra_list[1:])\n    phantom.debug(f\"dt debug - Currently monitoring {get_monitored_infrastructure_list__monitored_domain_infra_list_count} domain(s).\")\n",
+                    "warnings": {},
+                    "x": 20,
+                    "y": 147.99999999999986
+                },
+                "3": {
+                    "data": {
+                        "action": "enrich domain",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "Iris Invesitage or Enrich ",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "DomainTools Iris Investigate",
+                        "connectorConfigs": [
+                            "domaintoolscreds"
+                        ],
+                        "connectorId": "f18b7ef9-0cbd-4dbb-b8ed-ce62e17f0603",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "iris_invesitage_or_enrich",
+                        "id": "3",
+                        "parameters": {},
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "field": "domain"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "3",
+                    "type": "action",
+                    "userCode": "\n    # Write your custom code here...\n    monitored_domain_infra_list = json.loads(phantom.get_run_data(key=\"get_monitored_infrastructure_list:monitored_domain_infra_list\"))\n    parameters = [{\n        \"domain\": \",\".join([domain[0] for domain in monitored_domain_infra_list])\n    }]\n\n",
+                    "warnings": {},
+                    "x": 20,
+                    "y": 319.9999999999998
+                },
+                "4": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Compare Results",
+                            "customNameId": 0,
+                            "description": "",
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "compare_results",
+                        "id": "4",
+                        "inputParameters": [
+                            "get_monitored_infrastructure_list:custom_function:monitored_domain_infra_list"
+                        ],
+                        "outputVariables": [
+                            "has_infra_changes",
+                            "has_infra_changes_count"
+                        ],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "4",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n    iris_results = phantom.collect2(\n        container=container, \n        datapath=[\"iris_invesitage_or_enrich:action_result.data\"], \n        action_results=results\n    )\n    \n    # will unpack the list as the result from collect2 is a list[list[list[dict[any,any]]]]\n    # e.g. from this [[[{\"sample\": \"structure\"}]]] to [{}]\n    results = list(*iris_results[0])\n    current_domain_infra = {}\n    for result in results:\n        domain = result.get(\"domain\")\n        registrant_org = result.get(\"registrant_org\")\n        ns = result.get(\"name_server\")\n        mx = result.get(\"mx\")\n        asn = [ip.get(\"asn\", [{}])[0].get(\"value\") for ip in result.get(\"ip\")]\n        ssl_info = result.get(\"ssl_info\")\n        \n        # this will make sure unique domains is only added \n        # just in case there will be 2 same domains in the params\n        if domain not in current_domain_infra:\n            current_domain_infra[domain] = {\n                \"registrant_org\": registrant_org,\n                \"name_server\": ns,\n                \"mx\": mx,\n                \"asn\": asn,\n                \"ssl_info\": ssl_info\n            }\n    \n    # arrange new rows the table/custom list with the updated values\n    from datetime import datetime\n    \n    has_infra_changes = []\n    updated_list = []\n    for row in get_monitored_infrastructure_list__monitored_domain_infra_list:\n        domain, prev, current, last_updated = row\n        prev = json.loads(prev or \"{}\") \n        current = json.loads(current or \"{}\")\n        new_row = [domain, prev, current]\n        phantom.debug(f\"dt debug - updating {domain}\")\n        \n        if latest_domain_infra := current_domain_infra.get(domain):     \n            # convert to json string\n            latest_domain_infra_str = json.dumps(latest_domain_infra)\n            current_str = json.dumps(current)\n            \n            new_row = [domain, current_str, latest_domain_infra_str, last_updated]\n            \n            # detect changes should fall if prev has value.\n            if latest_domain_infra != current and prev:\n                phantom.debug(f\"dt debug - detected changes in {domain}\")\n                new_row[3] = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n                has_infra_changes.append(new_row)\n            \n            # update the current and previous infra if prev infra is None\n            # assuming it's the playbook first run\n            if not prev:\n                new_row[1] = latest_domain_infra\n                \n        updated_list.append(new_row)\n\n    # update the table/custom list\n    headers = [\"domain_name\", \"prev_infrastructure\", \"current_infrastructure\", \"last_updated\"]\n    updated_list.insert(0, headers)\n    \n    success, _ = phantom.set_list(list_name=\"domaintools_monitored_domain_infrastructure\", values=updated_list)\n    phantom.debug(f\"dt debug - phantom.set_list results: success: {success}\")\n    \n    compare_results__has_infra_changes = has_infra_changes\n    compare_results__has_infra_changes_count = len(has_infra_changes)\n",
+                    "warnings": {},
+                    "x": 20,
+                    "y": 460
+                },
+                "6": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": ">",
+                                        "param": "compare_results:custom_function:has_infra_changes_count",
+                                        "value": "0"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 1,
+                                        "op": "==",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "display": "Else",
+                                "logic": "and",
+                                "type": "else"
+                            }
+                        ],
+                        "functionId": 1,
+                        "functionName": "decision_1",
+                        "id": "6",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "6",
+                    "type": "decision",
+                    "warnings": {},
+                    "x": 100,
+                    "y": 600
+                },
+                "7": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Check for changed domains",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 4,
+                        "functionName": "check_for_changed_domains",
+                        "id": "7",
+                        "inputParameters": [
+                            "compare_results:custom_function:has_infra_changes"
+                        ],
+                        "outputVariables": [
+                            "merge_results",
+                            "event_name",
+                            "file_name"
+                        ],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "7",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n    alerts = []\n    for results in compare_results__has_infra_changes or []:\n        domain, _, _, _ = results\n        alerts.append(domain)\n    check_for_changed_domains__merge_results = \", \".join(alerts)\n    check_for_changed_domains__event_name = container.get(\"name\")\n    \n    # save filename as data to use by the nxt actions\n    from datetime import datetime\n    check_for_changed_domains__file_name = f\"summary_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.html\"\n",
+                    "warnings": {},
+                    "x": 110,
+                    "y": 788
+                },
+                "8": {
+                    "customCode": null,
+                    "data": {
+                        "advanced": {
+                            "customName": "Monitored Domains Infrastructure Change prompt",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "approver": {
+                            "type": "user",
+                            "value": "admin"
+                        },
+                        "functionId": 1,
+                        "functionName": "monitored_domains_infrastructure_change_prompt",
+                        "id": "8",
+                        "message": "Changes are detected in this domains:\n{0}\n\nFor more details go to Event: {1} > \"Files\" tab > Download '{2}'.",
+                        "parameters": [
+                            "check_for_changed_domains:custom_function:merge_results",
+                            "check_for_changed_domains:custom_function:event_name",
+                            "check_for_changed_domains:custom_function:file_name"
+                        ],
+                        "responseTime": 50,
+                        "responses": [],
+                        "type": "prompt"
+                    },
+                    "errors": {},
+                    "id": "8",
+                    "type": "prompt",
+                    "userCode": null,
+                    "warnings": {},
+                    "x": 60,
+                    "y": 1100
+                },
+                "9": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Merge Results",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 5,
+                        "functionName": "merge_results",
+                        "id": "9",
+                        "inputParameters": [
+                            "compare_results:custom_function:has_infra_changes"
+                        ],
+                        "outputVariables": [
+                            "context_data"
+                        ],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "9",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n    data = []\n    for result in compare_results__has_infra_changes:\n        domain, prev, current, last_updated = result\n        current = json.loads(current or {})\n        prev = json.loads(prev or {})\n        data.append(\n            {\n                \"domain\": domain,\n                \"prev\": prev,\n                \"current\": current,\n                \"list_keys\": [k for k, v in current.items() if isinstance(v, list)]\n            }\n        )\n        \n    merge_results__context_data = data\n",
+                    "warnings": {},
+                    "x": 240,
+                    "y": 952
+                }
+            },
+            "notes": ""
+        },
+        "input_spec": null,
+        "output_spec": [
+            {
+                "contains": [
+                    "file name"
+                ],
+                "datapaths": [],
+                "deduplicate": false,
+                "description": "The summary report file if there's a change detected in a domain",
+                "metadata": {},
+                "name": "summary_report_datetime"
+            }
+        ],
+        "playbook_type": "automation",
+        "python_version": "3",
+        "schema": "5.0.9",
+        "version": "6.0.0.114895"
+    },
+    "create_time": "2023-12-12T18:51:06.261322+00:00",
+    "draft_mode": false,
+    "labels": [
+        "dt_monitoring",
+        "events"
+    ],
+    "tags": []
+}

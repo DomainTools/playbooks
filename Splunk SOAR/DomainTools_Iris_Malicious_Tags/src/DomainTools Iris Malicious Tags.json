@@ -1,0 +1,226 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Uncategorized",
+    "coa": {
+        "data": {
+            "description": "This playbook retrieves the Iris Investigate profile of a domain and automatically flags domains that have been tagged as malicious in DomainTools Iris. The list of malicious tags are configurable by the analyst and can be kept up to date for automation",
+            "edges": [
+                {
+                    "id": "port_0_to_port_2",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
+                },
+                {
+                    "id": "port_2_to_port_3",
+                    "sourceNode": "2",
+                    "sourcePort": "2_out",
+                    "targetNode": "3",
+                    "targetPort": "3_in"
+                },
+                {
+                    "id": "port_4_to_port_1",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_3_to_port_4",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "4",
+                    "targetPort": "4_in"
+                }
+            ],
+            "hash": "658b604a73e19346bd1cb5d675db0ee7544e25f0",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "warnings": {},
+                    "x": 19.999999999999986,
+                    "y": -6.394884621840902e-14
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "warnings": {},
+                    "x": 19.999999999999986,
+                    "y": 624
+                },
+                "2": {
+                    "data": {
+                        "action": "lookup domain",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "Domain Iris Lookup",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "DomainTools Iris Investigate",
+                        "connectorConfigs": [
+                            "domaintoolscreds"
+                        ],
+                        "connectorId": "f18b7ef9-0cbd-4dbb-b8ed-ce62e17f0603",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "domain_iris_lookup",
+                        "id": "2",
+                        "parameters": {
+                            "domain": ""
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "field": "domain"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "2",
+                    "type": "action",
+                    "userCode": "\n    # Manually add the custom artifact datapath from this list. It should be in alphabetical order to make it work\n    datapaths = [\"artifact:*.cef.destinationDnsDomain\",\"artifact:*.cef.domain\",\"artifact:*.id\"]\n    \n    # Indices below are based on the position of the element in the `datapaths` variable above\n    DESTINATION_DNS_DOMAIN_ARTIFACT_INDEX = 0\n    DOMAIN_ARTIFACT_INDEX = 1\n    ARTIFACT_ID_INDEX = 2\n\n    container_artifact_data = phantom.collect2(container=container, datapath=datapaths)\n\n    # Empty `parameters` variable\n    parameters = []\n\n    # build parameters list for 'domain_reputation' call\n    for container_artifact_item in container_artifact_data:\n        if container_artifact_item[DESTINATION_DNS_DOMAIN_ARTIFACT_INDEX] is not None:\n            parameters.append({\n                \"domain\": container_artifact_item[DESTINATION_DNS_DOMAIN_ARTIFACT_INDEX],\n                \"context\": {'artifact_id': container_artifact_item[ARTIFACT_ID_INDEX]},\n            })\n        elif container_artifact_item[DOMAIN_ARTIFACT_INDEX] is not None:\n            parameters.append({\n                \"domain\": container_artifact_item[DOMAIN_ARTIFACT_INDEX],\n                \"context\": {'artifact_id': container_artifact_item[ARTIFACT_ID_INDEX]},\n            })\n\n",
+                    "warnings": {},
+                    "x": 0,
+                    "y": 148
+                },
+                "3": {
+                    "customCode": "@phantom.playbook_block()\ndef decision_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):\n    phantom.debug(\"decision_1() called\")\n\n    # check for 'if' condition 1\n    found_match_1 = phantom.decision(\n        container=container,\n        logical_operator=\"and\",\n        conditions=[\n            [\"domain_iris_lookup:action_result.data.*.tags.*.label\", \"in\", \"custom_list:iris_malicious_tags\"],\n            [\"artifact:*.severity\", \"not in\", [\"High\"]]\n        ])\n\n    # call connected blocks if condition 1 matched\n    if found_match_1:\n        return\n\n    return",
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "in",
+                                        "param": "domain_iris_lookup:action_result.data.*.tags.*.label",
+                                        "value": "custom_list:iris_malicious_tags"
+                                    },
+                                    {
+                                        "op": "not in",
+                                        "param": "artifact:*.severity",
+                                        "value": "High"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            }
+                        ],
+                        "functionId": 1,
+                        "functionName": "decision_1",
+                        "id": "3",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "3",
+                    "type": "decision",
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath configuration."
+                        ]
+                    },
+                    "x": 80,
+                    "y": 296
+                },
+                "4": {
+                    "data": {
+                        "advanced": {
+                            "join": [],
+                            "refreshNotableData": true
+                        },
+                        "functionId": 1,
+                        "functionName": "set_severity_1",
+                        "id": "4",
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "set_severity": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "choices": "notableSeverity",
+                                        "description": "",
+                                        "label": "severity",
+                                        "name": "severity",
+                                        "placeholder": "Select severity",
+                                        "renderType": "dropdown",
+                                        "required": true
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "set severity",
+                                "name": "set_severity",
+                                "refreshNotableData": true
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "set_severity": {
+                                "_internal": [
+                                    "container"
+                                ],
+                                "severity": "high"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "4",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 0,
+                    "y": 476
+                }
+            },
+            "notes": "This playbook checks a custom list called: iris_malicious_tags. You will need to make a list with this name, it should have one column of tags you wish to mark as malicious."
+        },
+        "input_spec": null,
+        "output_spec": null,
+        "playbook_type": "automation",
+        "python_version": "3",
+        "schema": "5.0.8",
+        "version": "5.5.0.108488"
+    },
+    "create_time": "2023-03-30T18:21:16.092858+00:00",
+    "draft_mode": false,
+    "labels": [
+        "events"
+    ],
+    "tags": []
+}

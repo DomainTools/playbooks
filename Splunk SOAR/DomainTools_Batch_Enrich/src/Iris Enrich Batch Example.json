@@ -1,0 +1,153 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Uncategorized",
+    "coa": {
+        "data": {
+            "description": "",
+            "edges": [
+                {
+                    "id": "port_0_to_port_2",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
+                },
+                {
+                    "id": "port_2_to_port_5",
+                    "sourceNode": "2",
+                    "sourcePort": "2_out",
+                    "targetNode": "5",
+                    "targetPort": "5_in"
+                },
+                {
+                    "id": "port_5_to_port_7",
+                    "sourceNode": "5",
+                    "sourcePort": "5_out",
+                    "targetNode": "7",
+                    "targetPort": "7_in"
+                },
+                {
+                    "id": "port_7_to_port_1",
+                    "sourceNode": "7",
+                    "sourcePort": "7_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                }
+            ],
+            "hash": "98eff0e21f87dbb15ce898bf7563ceab28951554",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "x": 1000,
+                    "y": 419.9999999999992
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "userCode": "\n    # This function is called after all actions are completed.\n    # summary of all the action and/or all details of actions\n    # can be collected here.\n\n    # summary_json = phantom.get_summary()\n    # if 'result' in summary_json:\n        # for action_result in summary_json['result']:\n            # if 'action_run_id' in action_result:\n                # action_results = phantom.get_action_results(action_run_id=action_result['action_run_id'], result_data=False, flatten=False)\n                # phantom.debug(action_results)\n\n",
+                    "x": 1000,
+                    "y": 880
+                },
+                "2": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "playbook_Iris_Enrich_Batch_Process_Domains_1",
+                        "id": "2",
+                        "inputs": {},
+                        "playbookName": "Iris Enrich Batch Process Domains",
+                        "playbookRepo": 2,
+                        "playbookRepoName": "local",
+                        "playbookType": "automation",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "2",
+                    "type": "playbook",
+                    "x": 980,
+                    "y": 540
+                },
+                "5": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Alert High Risk",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "alert_high_risk",
+                        "id": "5",
+                        "inputParameters": [],
+                        "outputVariables": [],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "5",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n\n    # get risk threshold\n    success, message, min_risk_score = phantom.get_list(list_name='domaintools_domain_risk', values=\"min_risk_score\")\n    min_risk_score = int(min_risk_score['matches'][0]['value'][1])\n    \n    # get enrich data\n    object_data = phantom.get_object(key=\"iris-enrich-batch-results\", playbook_name=\"Iris Enrich Batch Process Domains\")\n    phantom.debug(f\"dt debug - example playbook retrieved object data: {object_data}\")\n\n    # collect high risk domains\n    enrich_results = object_data.pop().get('value', {}).get('enrich-process-results')\n    action_results = enrich_results.pop().get('action_results').pop().get('data', [])\n    high_risk_domains = {}\n    phantom.debug(f\"dt debug - example playbook batch enrich playbook results: {enrich_results}\")\n\n    for result in action_results:\n        domain_name = result.get(\"domain\")\n        risk_score = result.get(\"domain_risk\", {}).get(\"risk_score\")\n        if risk_score > min_risk_score:\n            high_risk_domains[domain_name] = risk_score\n    \n    # build alerts\n    alerts = []\n    for domain, risk_score in high_risk_domains.items():\n        alerts.append(f\"Domain: {domain}, Risk Score: {risk_score}\")\n    phantom.debug(f\"dt debug - example playbook alerts: {alerts}\")\n    \n                \n    # prompt user high risk domains\n    user = container.get('owner_name', None)\n    role = None\n    message = \"\"\"The score was change as deteremined by the threshold for the following domains:\\n{0}\"\"\"\n\n    # save merge_results\n    alert_formatted = \"\\n\".join(alerts)\n    phantom.save_run_data(key=\"send_merge_result:merge_results\", value=json.dumps(alert_formatted))\n    \n    # parameter list for template variable replacement\n    parameters = [\n        \"send_merge_result:custom_function:merge_results\"\n    ]\n\n    phantom.prompt2(container=container, user=user, message=message, respond_in_mins=30, name=\"batch_playbook_example\", parameters=parameters)\n                \n\n",
+                    "x": 980,
+                    "y": 660
+                },
+                "7": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "playbook_Iris_Enrich_Clear_Queue_1",
+                        "id": "7",
+                        "inputs": {},
+                        "playbookName": "Iris Enrich Clear Queue",
+                        "playbookRepo": 2,
+                        "playbookRepoName": "local",
+                        "playbookType": "automation",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "7",
+                    "type": "playbook",
+                    "x": 980,
+                    "y": 760
+                }
+            },
+            "notes": ""
+        },
+        "input_spec": null,
+        "output_spec": null,
+        "playbook_type": "automation",
+        "python_version": "3",
+        "schema": "5.0.6",
+        "version": "5.3.1.84890"
+    },
+    "create_time": "2023-07-10T22:22:26.170405+00:00",
+    "draft_mode": false,
+    "labels": [
+        "*"
+    ],
+    "tags": []
+}
