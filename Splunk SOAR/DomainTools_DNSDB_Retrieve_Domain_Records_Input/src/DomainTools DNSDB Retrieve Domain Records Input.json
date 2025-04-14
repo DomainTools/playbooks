@@ -1,0 +1,344 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Uncategorized",
+    "coa": {
+        "data": {
+            "description": "This playbook servers as a function that can be use by another playbook. It works by taking a domain input then checking DNSDB Farsight for all Subdomains and Resource Records associated with the domain. This playbook accepts 5 parameters.",
+            "edges": [
+                {
+                    "id": "port_0_to_port_2",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
+                },
+                {
+                    "id": "port_3_to_port_4",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "4",
+                    "targetPort": "4_in"
+                },
+                {
+                    "id": "port_4_to_port_7",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "7",
+                    "targetPort": "7_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_7_to_port_8",
+                    "sourceNode": "7",
+                    "sourcePort": "7_out",
+                    "targetNode": "8",
+                    "targetPort": "8_in"
+                },
+                {
+                    "id": "port_8_to_port_1",
+                    "sourceNode": "8",
+                    "sourcePort": "8_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_7_to_port_1",
+                    "sourceNode": "7",
+                    "sourcePort": "7_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_2_to_port_3",
+                    "sourceNode": "2",
+                    "sourcePort": "2_out",
+                    "targetNode": "3",
+                    "targetPort": "3_in"
+                }
+            ],
+            "hash": "b3ecc2bd50aac51e3728048e2ab765fe85ee75f8",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "warnings": {},
+                    "x": 110,
+                    "y": 0
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "warnings": {},
+                    "x": 110,
+                    "y": 920
+                },
+                "2": {
+                    "data": {
+                        "advanced": {
+                            "customName": "get_input_parameters",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "get_input_parameters",
+                        "id": "2",
+                        "inputParameters": [
+                            "playbook_input:dt_domain",
+                            "playbook_input:subdomain_only",
+                            "playbook_input:time_first_after",
+                            "playbook_input:limit",
+                            "playbook_input:output_result_to_html"
+                        ],
+                        "outputVariables": [
+                            "dt_playbook_params",
+                            "output_result_to_html"
+                        ],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "2",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n    six_hours_ago = \"-21600\"\n    \n    DEFAULT_TIME_FIRST_AFTER = six_hours_ago\n    DEFAULT_REQUEST_LIMIT = 500\n    \n    phantom.debug(f\"dt debug - Retrieving data for this domains: {playbook_input_dt_domain_values}\")\n    \n    def _is_validate_true_false(value):\n        try:\n            return (\n                value in (None, \"\") or str(value).lower() == \"true\" or str(value).lower() == \"false\"\n            )\n        except (AttributeError, ValueError) as e:\n            return False\n    \n    def _is_positive_number(value):\n        try:\n            return int(value) >= 0\n        except (AttributeError, ValueError) as e:\n            return False\n        \n    # 'subdomain_only' -> defaults to False \n    phantom.debug(f\"dt debug - Validating playbook inputs.\")\n    subdomain_only = False\n    if playbook_input_subdomain_only_values:\n        if not _is_validate_true_false(playbook_input_subdomain_only_values[0]):\n            phantom.error(\"dt error - Invalid Value for 'subdomain'. Must be (True/False). Leave it blank for default value of False\")\n            return\n        subdomain_only = bool(playbook_input_subdomain_only_values[0])\n\n    time_first = DEFAULT_TIME_FIRST_AFTER \n    if playbook_input_time_first_after_values and playbook_input_time_first_after_values[0]:\n        time_first = playbook_input_time_first_after_values[0]\n        \n    limit = DEFAULT_REQUEST_LIMIT\n    if playbook_input_limit_values[0]:\n        if not _is_positive_number(playbook_input_limit_values[0]):\n            phantom.error(\"dt error - Invalid Value for 'limit'. Must be a positive number. Leave it blank for default value of 500.\")\n            return\n        limit = playbook_input_limit_values[0]\n    \n    # 'output_result_to_html' -> defaults to True\n    output_result_to_html = True \n    if playbook_input_output_result_to_html_values:\n        if not _is_validate_true_false(playbook_input_subdomain_only_values[0]):\n            phantom.error(\"dt error - Invalid Value for 'output_result_to_html'. Must be (True/False). Leave it blank for default value of False\")\n            return\n        output_result_to_html = bool(playbook_input_output_result_to_html_values[0])\n    \n    parameters = {\n        \"dt_domains\": playbook_input_dt_domain_values,\n        \"subdomain_only\": subdomain_only,\n        \"time_first\": time_first,\n        \"limit\": limit\n    }\n    \n    phantom.debug(f\"dt debug - Playbook current parameters: {parameters}\")\n    get_input_parameters__dt_playbook_params = parameters\n    phantom.debug(f\"dt debug - Outputting results to html: {output_result_to_html}\")\n    get_input_parameters__output_result_to_html = output_result_to_html\n",
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ]
+                    },
+                    "x": 90,
+                    "y": 148
+                },
+                "3": {
+                    "data": {
+                        "action": "rrset lookup",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "join": []
+                        },
+                        "connector": "DNSDB",
+                        "connectorConfigs": [
+                            "dan dnsdb key"
+                        ],
+                        "connectorId": "adf140f0-60e3-45ff-8d69-258b3c0a63b1",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "rrset_lookup_1",
+                        "id": "3",
+                        "parameters": {
+                            "limit": 200
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "numeric",
+                                "default": 200,
+                                "field": "limit"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "owner_name"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "3",
+                    "type": "action",
+                    "userCode": "\n    # Write your custom code here...\n    parameters = []\n    dt_playbook_params = json.loads(_ if (_ := phantom.get_run_data(key=\"get_input_parameters:dt_playbook_params\")) != \"\" else \"{}\")  # pylint: disable=used-before-assignment\n    subdomain_only = dt_playbook_params.get(\"subdomain_only\")\n    \n    for domain in dt_playbook_params.get(\"dt_domains\") or []:\n        owner_name = f\"*.{domain}\" if subdomain_only else domain\n        param_data = {\n            \"owner_name\": owner_name,\n            \"limit\": dt_playbook_params.get(\"limit\"),\n            \"type\": \"A\",\n            \"time_first_after\": dt_playbook_params.get(\"time_first\")\n        }\n        parameters.append(param_data)\n    \n",
+                    "warnings": {},
+                    "x": 90,
+                    "y": 296
+                },
+                "4": {
+                    "customCode": null,
+                    "data": {
+                        "advanced": {
+                            "customName": "parse_results",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "parse_results",
+                        "id": "4",
+                        "inputParameters": [],
+                        "outputVariables": [
+                            "parsed_dnsdb_result",
+                            "result_count"
+                        ],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "4",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n    results = []\n    summary = phantom.get_summary()\n    if result := summary.get(\"result\"):\n        for action_result in result:\n            if action_run_id := action_result.get(\"action_run_id\"):\n                action_results = phantom.get_action_results(action_run_id=action_run_id, flatten=False)\n                for ar in action_results.pop().get(\"action_results\") or []:\n                    data = {\n                       \"dt_domain\": ar.get(\"parameter\", {}).get(\"owner_name\", \"\").replace(\"*.\", \"\"),\n                       \"data\": ar.get(\"data\") or [],\n                       \"count\": ar.get(\"summary\", {}).get(\"total_items\") or 0\n                    }\n                    results.append(data)\n    \n    if not results:\n        parse_results__result_count = 0\n        return\n    \n    dt_playbook_params = json.loads(_ if (_ := phantom.get_run_data(key=\"get_input_parameters:dt_playbook_params\")) != \"\" else \"{}\")  # pylint: disable=used-before-assignment\n    if dt_playbook_params.get(\"subdomain_only\"):\n        for result in results:\n            dnsdb_rrname = set(data.get(\"rrname\") for data in result[\"data\"])\n            # override key \"data\" and \"count\" as we only getting unique values\n            result[\"data\"] = [{\"rrname\": rrname} for rrname in dnsdb_rrname]\n            result[\"count\"] = len(dnsdb_rrname)\n    else: # format epoch seconds \n        from datetime import datetime\n        _epoch_converter = lambda x: datetime.fromtimestamp(x).strftime('%Y-%m-%d %H:%M:%S')\n        for result in results:\n            result[\"data\"] = [{**result, \"time_first\": _epoch_converter(result[\"time_first\"])} for result in result[\"data\"]]\n    \n    parse_results__parsed_dnsdb_result = results\n    parse_results__result_count = len(results)\n    phantom.debug(f\"dt debug - discovered {parse_results__result_count} dnsdb domain records.\")\n    \n",
+                    "warnings": {},
+                    "x": 90,
+                    "y": 444
+                },
+                "7": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "get_input_parameters:custom_function:output_result_to_html",
+                                        "value": "true"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 1,
+                                        "op": "==",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "display": "Else",
+                                "logic": "and",
+                                "type": "else"
+                            }
+                        ],
+                        "functionId": 2,
+                        "functionName": "decision_2",
+                        "id": "7",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "7",
+                    "type": "decision",
+                    "warnings": {},
+                    "x": 170,
+                    "y": 592
+                },
+                "8": {
+                    "data": {
+                        "advanced": {
+                            "customName": "output_result_to_html",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 4,
+                        "functionName": "output_result_to_html",
+                        "id": "8",
+                        "inputParameters": [
+                            "parse_results:custom_function:parsed_dnsdb_result"
+                        ],
+                        "outputVariables": [
+                            "output_file_name"
+                        ],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "8",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n    dt_playbook_params = json.loads(_ if (_ := phantom.get_run_data(key=\"get_input_parameters:dt_playbook_params\")) != \"\" else \"{}\")  # pylint: disable=used-before-assignment\n    phantom.debug(f\"dt debug - Saving results to a html file...\")\n    html_body = phantom.render_template(\n        \"\"\"\n        <!DOCTYPE html>\n<html>\n<head>\n  <meta http-equiv='X-UA-Compatible' content='IE=edge'>\n  <title>DT DNSDB Retrieve Domain Records</title>\n  <meta name='viewport' content='width=device-width, initial-scale=1'>\n  <style>\n    html, body {\n      margin: 0;\n      padding: 0;\n      font-family: sans-serif;\n      font-size: 14px;\n    }\n\n    table, th, td {\n      border: 1px solid black;\n      border-collapse: collapse;\n      padding: 5px;\n    }\n\n    .wrapper {\n      width: 60%;  \n      padding: 10px;\n    }\n\n    p {\n      margin: 7px 0 0 2px;\n    }\n\n    .header {\n      background-color: #007abd;\n      color:white;\n    }\n    \n  </style>\n</head>\n<body>\n  <div class=\"wrapper\">\n    <table style=\"width: 100%;\">\n      <tr class=\"header\">\n        <th>dt_domain</th>\n        <th>dnsdb_rrname</th>\n        {% if not subdomain_only %}\n          <th>dnsdb_rrtype</th>\n          <th>dnsdb_rrdata</th>\n          <th>dnsdb_time_last_formatted</th>\n        {% endif %}\n        <th>dnsdb_count</th>\n      </tr>\n      {% for result in results %}\n        <tr>\n          <!-- dt_domain column -->\n          <td><p style=\"text-align:center; margin:0;\">{{ result.dt_domain }}</p></td>\n          <!-- end of dt_domain column -->\n          <!-- dnsdb_rrname column -->\n          <td>\n            {% for dnsdb_data in result.data %}\n              <p style=\"text-align:center; margin:0;\">{{ dnsdb_data.rrname }}</p>\n            {% endfor %}\n          </td>\n            <!-- end of dnsdb_rrtype column -->\n          {% if not subdomain_only %}\n            <!-- dnsdb_rrtype column -->\n            <td><p style=\"text-align:center; margin:0;\">A</p></td>\n            <!-- end of dnsdb_rrtype column -->\n            \n            <!-- dnsdb_rrdata column -->\n            <td>\n              {% for dnsdb_data in result.data %}\n                {% for rdata in dnsdb_data.rdata %}\n                  <p style=\"text-align:center; margin:1px;\">{{ rdata }}</p>\n                {% endfor %}\n              {% endfor %}\n            </td>\n            <!-- end of dnsdb_rrdata column -->\n            \n            <!-- dnsdb_time_last_formatted column -->\n            <td>\n              {% for dnsdb_data in result.data %}\n                <p style=\"text-align:center; margin:1px;\">{{ dnsdb_data.time_first }}</p>\n              {% endfor %}\n            </td>\n            <!-- end of dnsdb_time_last_formatted column -->\n          {% endif %}\n          <!-- dnsdb_count column -->\n          <td><p style=\"text-align:center; margin:1px;\">{{ result.count }}</p></td>\n          <!-- end of dnsdb_count column -->\n        </tr>\n      {% endfor %}\n    </table>\n  </div>\n</body>\n</html>\n\n        \"\"\",\n        {\n            \"results\": parse_results__parsed_dnsdb_result,\n            \"subdomain_only\": dt_playbook_params.get(\"subdomain_only\") or False\n        }\n    )\n    html_to_string = \"\".join([html_body])\n    \n    phantom.debug(f\"dt debug - Outputing results...\")\n    ### write to the vault\n    # create a file name\n    from datetime import datetime\n    file_name = f\"dt_dnsdb_domain_records_result_{datetime.now().strftime('%Y%m%d_%H%M%S')}.html\"\n    \n    # create a tmp file\n    with open(f\"/opt/phantom/vault/tmp/{file_name}\", \"w\") as report_file:\n        report_file.write(html_to_string)\n    # write the html to a pdf at the tempfile location\n    #if phantom.html_string_to_pdf(html_body, tf.name):\n    phantom.vault_add(container=container, file_location=f\"/opt/phantom/vault/tmp/{file_name}\", file_name=file_name)\n    output_result_to_html__output_file_name = file_name\n",
+                    "warnings": {},
+                    "x": 0,
+                    "y": 772
+                }
+            },
+            "notes": ""
+        },
+        "input_spec": [
+            {
+                "contains": [
+                    "domain"
+                ],
+                "description": "The domain to lookup. ",
+                "name": "dt_domain"
+            },
+            {
+                "contains": [],
+                "description": "Flag results for subdomain only. Use True or False as value. Default is False.",
+                "name": "subdomain_only"
+            },
+            {
+                "contains": [],
+                "description": "Filter for Records first seen after (epoch seconds, relative seconds e.g. -3153600, or UTC timestamp e.g. 2021-01-05T12:06:02Z). Defaults to 6 hours ago (-21600)",
+                "name": "time_first_after"
+            },
+            {
+                "contains": [],
+                "description": "The query limit. Default is 500",
+                "name": "limit"
+            },
+            {
+                "contains": [],
+                "description": "Creates a HTML result in the current container. Use True or False as value. Default is True.",
+                "name": "output_result_to_html"
+            }
+        ],
+        "output_spec": [
+            {
+                "contains": [],
+                "datapaths": [
+                    "parse_results:custom_function:parsed_dnsdb_result"
+                ],
+                "deduplicate": false,
+                "description": "The parsed result from dnsdb rrset lookup.",
+                "metadata": {},
+                "name": "parsed_dnsdb_rrset_lookup_result"
+            },
+            {
+                "contains": [
+                    "file name"
+                ],
+                "datapaths": [
+                    "output_result_to_html:custom_function:output_file_name"
+                ],
+                "deduplicate": false,
+                "description": "The filename of the html output",
+                "metadata": {},
+                "name": "output_file_name"
+            }
+        ],
+        "playbook_type": "data",
+        "python_version": "3",
+        "schema": "5.0.9",
+        "version": "6.0.0.114895"
+    },
+    "create_time": "2023-09-06T17:24:38.256847+00:00",
+    "draft_mode": false,
+    "labels": [
+        "*"
+    ],
+    "tags": []
+}

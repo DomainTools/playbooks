@@ -1,0 +1,570 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Scheduled Playbook",
+    "coa": {
+        "data": {
+            "description": "This playbook retrieves the risk score for a domain and stores it in a custom list. The flow will continue to monitor the domain for changes to the risk score based on the run schedule.",
+            "edges": [
+                {
+                    "id": "port_0_to_port_19",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "19",
+                    "targetPort": "19_in"
+                },
+                {
+                    "id": "port_19_to_port_3",
+                    "sourceNode": "19",
+                    "sourcePort": "19_out",
+                    "targetNode": "3",
+                    "targetPort": "3_in"
+                },
+                {
+                    "id": "port_3_to_port_4",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "4",
+                    "targetPort": "4_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_4_to_port_7",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "7",
+                    "targetPort": "7_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 2
+                        }
+                    ],
+                    "id": "port_4_to_port_10",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "10",
+                    "targetPort": "10_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_4_to_port_20",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "20",
+                    "targetPort": "20_in"
+                },
+                {
+                    "id": "port_20_to_port_21",
+                    "sourceNode": "20",
+                    "sourcePort": "20_out",
+                    "targetNode": "21",
+                    "targetPort": "21_in"
+                },
+                {
+                    "id": "port_21_to_port_24",
+                    "sourceNode": "21",
+                    "sourcePort": "21_out",
+                    "targetNode": "24",
+                    "targetPort": "24_in"
+                },
+                {
+                    "id": "port_7_to_port_1",
+                    "sourceNode": "7",
+                    "sourcePort": "7_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_10_to_port_1",
+                    "sourceNode": "10",
+                    "sourcePort": "10_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_26_to_port_1",
+                    "sourceNode": "26",
+                    "sourcePort": "26_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_24_to_port_27",
+                    "sourceNode": "24",
+                    "sourcePort": "24_out",
+                    "targetNode": "27",
+                    "targetPort": "27_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_27_to_port_25",
+                    "sourceNode": "27",
+                    "sourcePort": "27_out",
+                    "targetNode": "25",
+                    "targetPort": "25_in"
+                },
+                {
+                    "id": "port_25_to_port_26",
+                    "sourceNode": "25",
+                    "sourcePort": "25_out",
+                    "targetNode": "26",
+                    "targetPort": "26_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_27_to_port_1",
+                    "sourceNode": "27",
+                    "sourcePort": "27_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                }
+            ],
+            "hash": "9b39e4da93f7eae9d9683e9f0fbef57917bcfd50",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "warnings": {},
+                    "x": 120,
+                    "y": -1.4388490399142029e-12
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "warnings": {},
+                    "x": 120,
+                    "y": 1300
+                },
+                "10": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Max Limit Domain Monitored Prompt",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "approver": {
+                            "type": "user",
+                            "value": "admin"
+                        },
+                        "functionId": 3,
+                        "functionName": "max_limit_domain_monitored_prompt",
+                        "id": "10",
+                        "message": "Reduce the number of domains. Max is 100.",
+                        "parameters": [],
+                        "responseTime": 30,
+                        "responses": [],
+                        "type": "prompt"
+                    },
+                    "errors": {},
+                    "id": "10",
+                    "type": "prompt",
+                    "warnings": {},
+                    "x": 500,
+                    "y": 480
+                },
+                "19": {
+                    "customCode": null,
+                    "data": {
+                        "advanced": {
+                            "customName": "get_monitored_domains_list",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 4,
+                        "functionName": "get_monitored_domains_list",
+                        "id": "19",
+                        "inputParameters": [],
+                        "outputVariables": [
+                            "domain_monitored_list",
+                            "domain_monitored_count"
+                        ],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "19",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n    _, _, domain_monitored_list = phantom.get_list(list_name='domaintools_monitored_domains_risk_score')\n    get_monitored_domains_list__domain_monitored_list = domain_monitored_list[1:]\n    get_monitored_domains_list__domain_monitored_count = len(get_monitored_domains_list__domain_monitored_list)\n    phantom.debug(f\"dt debug - currently monitoring {get_monitored_domains_list__domain_monitored_count} domains.\")\n\n",
+                    "warnings": {},
+                    "x": 100,
+                    "y": 99.99999999999955
+                },
+                "20": {
+                    "data": {
+                        "action": "lookup domain",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "iris ivestigate or enrich",
+                            "customNameId": 0,
+                            "description": "You can manually select DT action to used. It can be lookup domain (Iris Investigate) or enrich domain (Iris Enrich)",
+                            "join": []
+                        },
+                        "connector": "DomainTools Iris Investigate",
+                        "connectorConfigs": [
+                            "domaintoolscreds"
+                        ],
+                        "connectorId": "f18b7ef9-0cbd-4dbb-b8ed-ce62e17f0603",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "iris_ivestigate_or_enrich",
+                        "id": "20",
+                        "parameters": {},
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "field": "domain"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "20",
+                    "type": "action",
+                    "userCode": "\n    # Write your custom code here...\n    domain_monitored_list = json.loads(_ if (_ := phantom.get_run_data(key=\"get_monitored_domains_list:domain_monitored_list\")) != \"\" else \"[]\") # pylint: disable=used-before-assignment\n    parameters = [{\"domain\": \",\".join([domain[0] for domain in domain_monitored_list])}]\n\n",
+                    "warnings": {},
+                    "x": 100,
+                    "y": 520
+                },
+                "21": {
+                    "data": {
+                        "advanced": {
+                            "customName": "get_current_domain_risk_value",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "get_current_domain_risk_value",
+                        "id": "21",
+                        "inputParameters": [
+                            "get_monitored_domains_list:custom_function:domain_monitored_list"
+                        ],
+                        "outputVariables": [],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "21",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n    iris_results = phantom.collect2(\n        container=container, \n        datapath=[\"iris_ivestigate_or_enrich:action_result.data\"], \n        action_results=results\n    )\n    domain_results = {}\n    # will unpack the list as the result from collect2 is a list[list[list[dict[any,any]]]]\n    # e.g. from this [[[{\"sample\": \"structure\"}]]] to [{}]\n    results = list(*iris_results[0])\n    for result in results:\n        domain_name = result.get(\"domain\")\n        if domain_name not in domain_results:\n            domain_results[domain_name] = {\"risk_score\": result.get(\"domain_risk\", {}).get(\"risk_score\")}\n                \n    # get the current domain risk score value\n    # then update the current risk score column\n    from datetime import datetime\n    \n    updated_list = []\n    for domain in get_monitored_domains_list__domain_monitored_list or []:\n        d_name, prev_score, current_score, last_updated = domain\n        row = domain\n        \n        if latest_domain_score := domain_results.get(d_name):\n            new_risk_score = latest_domain_score.get(\"risk_score\") or 0\n            try:\n                # safely convert it to int\n                current_score = int(current_score)\n            except:\n                pass\n            \n            row = [d_name, current_score, new_risk_score, last_updated]\n            # only update when new risk score is not equal to current risk score\n            if new_risk_score != current_score:\n                new_last_updated = datetime.now().strftime(\"%Y-%m-%d %H:%M:%S\")\n                row[3] = new_last_updated\n            \n            # update the current and previous score if prev score is empty\n            # assuming it's the playbook first run\n            if prev_score in [\"\", None]:\n                row[1] = new_risk_score\n\n        updated_list.append(row)\n        \n    # update the domain monitored list\n    headers = [\"domain_name\", \"prev_risk_score\", \"current_risk_score\", \"last_updated\"]\n    updated_list.insert(0, headers)\n\n    success, _ = phantom.set_list(list_name=\"domaintools_monitored_domains_risk_score\", values=updated_list)\n    phantom.debug(f\"phantom.set_list results: success: {success}\")\n \n",
+                    "warnings": {},
+                    "x": 100,
+                    "y": 620
+                },
+                "24": {
+                    "customCode": null,
+                    "data": {
+                        "advanced": {
+                            "customName": "check_risk_score_change",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 3,
+                        "functionName": "check_risk_score_change",
+                        "id": "24",
+                        "inputParameters": [
+                            "get_riskscore_threshold:custom_function:riskscore_threshold"
+                        ],
+                        "outputVariables": [
+                            "higher_than_threshold_domains",
+                            "higher_than_threshold_domains_count"
+                        ],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "24",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n    higher_than_threshold_domains = []\n    _, _, domain_monitored_list = phantom.get_list(list_name='domaintools_monitored_domains_risk_score')\n    \n    domain_monitored_list = domain_monitored_list[1:]\n    for domain in domain_monitored_list or []:\n        name, prev_score, current_score, last_updated = domain\n        # use try catch to safely convert string to float\n        try: \n            prev_score = float(prev_score)\n            current_score = float(current_score)\n        except ValueError:\n            prev_score, current_score = 0, 0\n        \n        # check if within threshold\n        diff = abs(float(current_score) - float(prev_score))\n        if diff > float(get_riskscore_threshold__riskscore_threshold or 0):\n            higher_than_threshold_domains.append(domain)\n    \n    check_risk_score_change__higher_than_threshold_domains = higher_than_threshold_domains\n    check_risk_score_change__higher_than_threshold_domains_count = len(higher_than_threshold_domains)\n",
+                    "warnings": {},
+                    "x": 100,
+                    "y": 740
+                },
+                "25": {
+                    "customCode": null,
+                    "data": {
+                        "advanced": {
+                            "customName": "send_merge_result",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 5,
+                        "functionName": "send_merge_result",
+                        "id": "25",
+                        "inputParameters": [
+                            "check_risk_score_change:custom_function:higher_than_threshold_domains"
+                        ],
+                        "outputVariables": [
+                            "merge_results"
+                        ],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "25",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n    alerts = []\n    message_body_template = \"Domain: {domain}, Previous Risk Score: {prev_score}, Current Risk Score: {current_score}\"\n    for domain in check_risk_score_change__higher_than_threshold_domains or []:\n        name, prev_score, current_score, last_updated = domain\n        alerts.append(message_body_template.format(domain=name, prev_score=prev_score, current_score=current_score))\n    \n    send_merge_result__merge_results = \"\\n\".join(alerts)\n",
+                    "warnings": {},
+                    "x": 100,
+                    "y": 1040
+                },
+                "26": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Monitored Domains Risk Score Change prompt",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "approver": {
+                            "type": "user",
+                            "value": "container_owner"
+                        },
+                        "functionId": 2,
+                        "functionName": "monitored_domains_risk_score_change_prompt",
+                        "id": "26",
+                        "message": "The score was change as deteremined by the threshold for the following domains:\n{0}",
+                        "parameters": [
+                            "send_merge_result:custom_function:merge_results"
+                        ],
+                        "responseTime": 30,
+                        "responses": [],
+                        "type": "prompt"
+                    },
+                    "errors": {},
+                    "id": "26",
+                    "type": "prompt",
+                    "warnings": {},
+                    "x": 180,
+                    "y": 1140
+                },
+                "27": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": ">",
+                                        "param": "check_risk_score_change:custom_function:higher_than_threshold_domains_count",
+                                        "value": "0"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 1,
+                                        "op": "==",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "display": "Else",
+                                "logic": "and",
+                                "type": "else"
+                            }
+                        ],
+                        "functionId": 2,
+                        "functionName": "decision_2",
+                        "id": "27",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "27",
+                    "type": "decision",
+                    "warnings": {},
+                    "x": 180,
+                    "y": 840
+                },
+                "3": {
+                    "customCode": null,
+                    "data": {
+                        "advanced": {
+                            "customName": "get_riskscore_threshold",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "get_riskscore_threshold",
+                        "id": "3",
+                        "inputParameters": [],
+                        "outputVariables": [
+                            "riskscore_threshold"
+                        ],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "3",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n    _, _, riskscore_threshold = phantom.get_list(list_name='domaintools_riskscore_threshold', values='riskscore_threshold')\n    get_riskscore_threshold__riskscore_threshold = riskscore_threshold['matches'][0]['value'][1]\n    phantom.debug(f\"dt debug - current risk score threshold is: {get_riskscore_threshold__riskscore_threshold}\")\n\n",
+                    "warnings": {},
+                    "x": 100,
+                    "y": 220
+                },
+                "4": {
+                    "customCode": null,
+                    "data": {
+                        "advanced": {
+                            "customName": "",
+                            "customNameId": -1,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "get_monitored_domains_list:custom_function:domain_monitored_count",
+                                        "value": "0"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 1,
+                                        "op": ">",
+                                        "param": "get_monitored_domains_list:custom_function:domain_monitored_count",
+                                        "value": "0"
+                                    },
+                                    {
+                                        "conditionIndex": 1,
+                                        "op": "<=",
+                                        "param": "get_monitored_domains_list:custom_function:domain_monitored_count",
+                                        "value": "100"
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "display": "Else If",
+                                "logic": "and",
+                                "type": "elif"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 2,
+                                        "op": ">",
+                                        "param": "get_monitored_domains_list:custom_function:domain_monitored_count",
+                                        "value": "100"
+                                    },
+                                    {
+                                        "conditionIndex": 2,
+                                        "op": "==",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 2,
+                                "display": "Else If",
+                                "logic": "and",
+                                "type": "elif"
+                            }
+                        ],
+                        "functionId": 1,
+                        "functionName": "decision_1",
+                        "id": "4",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "4",
+                    "type": "decision",
+                    "userCode": null,
+                    "warnings": {},
+                    "x": 180,
+                    "y": 320
+                },
+                "7": {
+                    "data": {
+                        "advanced": {
+                            "customName": "No Domain Monitored Risk Score Prompt",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "approver": {
+                            "type": "user",
+                            "value": "admin"
+                        },
+                        "functionId": 1,
+                        "functionName": "no_domain_monitored_risk_score_prompt",
+                        "id": "7",
+                        "message": "Please add at least 1 domain to be monitored. Current count is {0}.\n",
+                        "parameters": [
+                            "get_monitored_domains_count:custom_function:monitored_domain_count"
+                        ],
+                        "responseTime": 30,
+                        "responses": [],
+                        "type": "prompt"
+                    },
+                    "errors": {},
+                    "id": "7",
+                    "type": "prompt",
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ]
+                    },
+                    "x": -140,
+                    "y": 480
+                }
+            },
+            "notes": ""
+        },
+        "input_spec": null,
+        "output_spec": null,
+        "playbook_type": "automation",
+        "python_version": "3",
+        "schema": "5.0.9",
+        "version": "6.0.0.114895"
+    },
+    "create_time": "2023-12-12T18:46:20.121141+00:00",
+    "draft_mode": false,
+    "labels": [
+        "dt_monitoring",
+        "events"
+    ],
+    "tags": []
+}

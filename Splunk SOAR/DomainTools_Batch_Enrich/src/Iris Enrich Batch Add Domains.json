@@ -1,0 +1,98 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Uncategorized",
+    "coa": {
+        "data": {
+            "description": "",
+            "edges": [
+                {
+                    "id": "port_0_to_port_3",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "3",
+                    "targetPort": "3_in"
+                },
+                {
+                    "id": "port_3_to_port_1",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                }
+            ],
+            "hash": "16adb3e3f62a06d9a04ffc7d472e28d2c8ed55f0",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "x": 1000,
+                    "y": 419.9999999999991
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "userCode": "\n    # This function is called after all actions are completed.\n    # summary of all the action and/or all details of actions\n    # can be collected here.\n\n    # summary_json = phantom.get_summary()\n    # if 'result' in summary_json:\n        # for action_result in summary_json['result']:\n            # if 'action_run_id' in action_result:\n                # action_results = phantom.get_action_results(action_run_id=action_result['action_run_id'], result_data=False, flatten=False)\n                # phantom.debug(action_results)\n\n",
+                    "x": 1000,
+                    "y": 620
+                },
+                "3": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Add Artifact to Queue",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "add_artifact_to_queue",
+                        "id": "3",
+                        "inputParameters": [
+                            "artifact:*.id",
+                            "artifact:*.cef.destinationDnsDomain"
+                        ],
+                        "outputVariables": [],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "3",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n    queue = phantom.get_list(list_name=\"iris_enrich_batch_queue\", column_index=1)\n    queued_artifacts = []\n    for item in queue[2]:\n        queued_artifacts.append(item[0])\n    queued_artifacts = set(queued_artifacts)\n    phantom.debug(f\"dt debug - artifacts in queue: {queued_artifacts}\")\n    phantom.debug(f\"dt debug - artifacts in event: {container_artifact_header_item_0}\")\n    \n    for i in range(len(container_artifact_header_item_0)):\n        artifact_id = container_artifact_header_item_0[i]\n        domain = container_artifact_cef_item_1[i]\n        if str(artifact_id) in queued_artifacts:\n            phantom.debug(f\"dt debug - not adding artifact: {artifact_id} - {domain} to queue\")\n        else:\n            phantom.debug(f\"dt debug - adding artifact: {artifact_id} - {domain} to queue\")\n            phantom.add_list(list_name=\"iris_enrich_batch_queue\", values=[artifact_id, domain])\n    \n\n",
+                    "x": 980,
+                    "y": 520
+                }
+            },
+            "notes": ""
+        },
+        "input_spec": null,
+        "output_spec": null,
+        "playbook_type": "automation",
+        "python_version": "3",
+        "schema": "5.0.6",
+        "version": "5.3.1.84890"
+    },
+    "create_time": "2023-07-11T16:49:00.562897+00:00",
+    "draft_mode": false,
+    "labels": [
+        "*"
+    ],
+    "tags": []
+}

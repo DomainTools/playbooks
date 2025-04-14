@@ -1,0 +1,173 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Uncategorized",
+    "coa": {
+        "data": {
+            "description": "",
+            "edges": [
+                {
+                    "id": "port_5_to_port_10",
+                    "sourceNode": "5",
+                    "sourcePort": "5_out",
+                    "targetNode": "10",
+                    "targetPort": "10_in"
+                },
+                {
+                    "id": "port_0_to_port_5",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "5",
+                    "targetPort": "5_in"
+                },
+                {
+                    "id": "port_10_to_port_11",
+                    "sourceNode": "10",
+                    "sourcePort": "10_out",
+                    "targetNode": "11",
+                    "targetPort": "11_in"
+                },
+                {
+                    "id": "port_11_to_port_1",
+                    "sourceNode": "11",
+                    "sourcePort": "11_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                }
+            ],
+            "hash": "49c1b2f85f91d4ea2deefc7f0726a28d3bba97b8",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "x": 19.999999999999986,
+                    "y": -1.2789769243681803e-13
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "userCode": "\n    # This function is called after all actions are completed.\n    # summary of all the action and/or all details of actions\n    # can be collected here.\n\n    # summary_json = phantom.get_summary()\n    # if 'result' in summary_json:\n        # for action_result in summary_json['result']:\n            # if 'action_run_id' in action_result:\n                # action_results = phantom.get_action_results(action_run_id=action_result['action_run_id'], result_data=False, flatten=False)\n                # phantom.debug(action_results)\n\n",
+                    "x": 19.999999999999986,
+                    "y": 622
+                },
+                "10": {
+                    "customCode": null,
+                    "data": {
+                        "action": "enrich domain",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "join": []
+                        },
+                        "connector": "DomainTools Iris Investigate",
+                        "connectorConfigs": [
+                            "domaintoolsiriscreds"
+                        ],
+                        "connectorId": "f18b7ef9-0cbd-4dbb-b8ed-ce62e17f0603",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "enrich_domain_1",
+                        "id": "10",
+                        "parameters": {
+                            "domain": {
+                                "functionId": 1,
+                                "parameters": [
+                                    ""
+                                ],
+                                "template": "{0}\n"
+                            }
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "field": "domain"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "10",
+                    "type": "action",
+                    "userCode": "\n    # Write your custom code here...\n    # @todo figure out how to pass list of domains from previous actions. possibly create temp artifact?\n    domains_to_enrich = phantom.get_run_data(key='build_domain_batch:domains_to_enrich')\n    domain_string = ','.join(json.loads(domains_to_enrich))\n\n    parameters = []\n    parameters.append({'domain': domain_string})\n\n",
+                    "x": 0,
+                    "y": 296
+                },
+                "11": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Save Results",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "save_results",
+                        "id": "11",
+                        "inputParameters": [],
+                        "outputVariables": [],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "11",
+                    "type": "code",
+                    "userCode": "    \n    # Write your custom code here...\n    playbook_results = {}\n    summary = phantom.get_summary()\n    phantom.debug(f\"dt debug - result summary {summary}\")\n    \n    if result := summary.get(\"result\"):\n        for action_result in result:\n            if action_run_id := action_result.get(\"action_run_id\"):\n                action_results = phantom.get_action_results(action_run_id=action_run_id, flatten=False)\n                playbook_results['enrich-process-results'] = action_results\n                \n                phantom.debug(f\"dt debug - action_run_id {action_run_id}\")\n                phantom.debug(f\"dt debug - action_results {action_results}\")\n                \n    \n    phantom.save_object(key=\"iris-enrich-batch-results\", value=playbook_results, auto_delete=False, playbook_name=\"Iris Enrich Batch Process Domains\")\n\n",
+                    "x": 0,
+                    "y": 480
+                },
+                "5": {
+                    "data": {
+                        "advanced": {
+                            "customName": "Build Domain Batch",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 3,
+                        "functionName": "build_domain_batch",
+                        "id": "5",
+                        "inputParameters": [],
+                        "outputVariables": [
+                            "domains_to_enrich"
+                        ],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "5",
+                    "type": "code",
+                    "userCode": "\n    build_domain_batch__domains_to_enrich = []\n    queue = phantom.get_list(list_name=\"iris_enrich_batch_queue\")\n    for artifact in queue[2]:\n        if artifact[1]:\n            phantom.debug(f\"dt debug - artifact to enrich: {artifact}\")\n            build_domain_batch__domains_to_enrich.append(artifact[1])\n    phantom.debug(f\"dt debug - domain batch: {build_domain_batch__domains_to_enrich}\")\n    \n",
+                    "x": 0,
+                    "y": 148
+                }
+            },
+            "notes": ""
+        },
+        "input_spec": null,
+        "output_spec": null,
+        "playbook_type": "automation",
+        "python_version": "3",
+        "schema": "5.0.6",
+        "version": "5.3.1.84890"
+    },
+    "create_time": "2023-07-11T23:49:29.460431+00:00",
+    "draft_mode": false,
+    "labels": [
+        "*"
+    ],
+    "tags": []
+}

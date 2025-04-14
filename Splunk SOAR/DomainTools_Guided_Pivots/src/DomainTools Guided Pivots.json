@@ -1,0 +1,1189 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Uncategorized",
+    "coa": {
+        "data": {
+            "description": "This playbook retrieves the Iris Investigate profile of domain and automatically identifies potential connected infrastructure related to artifacts based on DomainTools Guided Pivot value. The pivot value is set based off of a configurable custom list.",
+            "edges": [
+                {
+                    "id": "port_0_to_port_2",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
+                },
+                {
+                    "id": "port_2_to_port_3",
+                    "sourceNode": "2",
+                    "sourcePort": "2_out",
+                    "targetNode": "3",
+                    "targetPort": "3_in"
+                },
+                {
+                    "id": "port_3_to_port_4",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "4",
+                    "targetPort": "4_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_4_to_port_5",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "5",
+                    "targetPort": "5_in"
+                },
+                {
+                    "id": "port_5_to_port_1",
+                    "sourceNode": "5",
+                    "sourcePort": "5_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_3_to_port_6",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "6",
+                    "targetPort": "6_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_6_to_port_14",
+                    "sourceNode": "6",
+                    "sourcePort": "6_out",
+                    "targetNode": "14",
+                    "targetPort": "14_in"
+                },
+                {
+                    "id": "port_14_to_port_1",
+                    "sourceNode": "14",
+                    "sourcePort": "14_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_3_to_port_7",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "7",
+                    "targetPort": "7_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_7_to_port_15",
+                    "sourceNode": "7",
+                    "sourcePort": "7_out",
+                    "targetNode": "15",
+                    "targetPort": "15_in"
+                },
+                {
+                    "id": "port_3_to_port_8",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "8",
+                    "targetPort": "8_in"
+                },
+                {
+                    "id": "port_3_to_port_9",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "9",
+                    "targetPort": "9_in"
+                },
+                {
+                    "id": "port_3_to_port_10",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "10",
+                    "targetPort": "10_in"
+                },
+                {
+                    "id": "port_3_to_port_11",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "11",
+                    "targetPort": "11_in"
+                },
+                {
+                    "id": "port_3_to_port_12",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "12",
+                    "targetPort": "12_in"
+                },
+                {
+                    "id": "port_3_to_port_13",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "13",
+                    "targetPort": "13_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_8_to_port_16",
+                    "sourceNode": "8",
+                    "sourcePort": "8_out",
+                    "targetNode": "16",
+                    "targetPort": "16_in"
+                },
+                {
+                    "id": "port_16_to_port_1",
+                    "sourceNode": "16",
+                    "sourcePort": "16_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_9_to_port_17",
+                    "sourceNode": "9",
+                    "sourcePort": "9_out",
+                    "targetNode": "17",
+                    "targetPort": "17_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_10_to_port_18",
+                    "sourceNode": "10",
+                    "sourcePort": "10_out",
+                    "targetNode": "18",
+                    "targetPort": "18_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_11_to_port_19",
+                    "sourceNode": "11",
+                    "sourcePort": "11_out",
+                    "targetNode": "19",
+                    "targetPort": "19_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_12_to_port_20",
+                    "sourceNode": "12",
+                    "sourcePort": "12_out",
+                    "targetNode": "20",
+                    "targetPort": "20_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_13_to_port_21",
+                    "sourceNode": "13",
+                    "sourcePort": "13_out",
+                    "targetNode": "21",
+                    "targetPort": "21_in"
+                },
+                {
+                    "id": "port_17_to_port_1",
+                    "sourceNode": "17",
+                    "sourcePort": "17_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_18_to_port_1",
+                    "sourceNode": "18",
+                    "sourcePort": "18_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_19_to_port_1",
+                    "sourceNode": "19",
+                    "sourcePort": "19_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_20_to_port_1",
+                    "sourceNode": "20",
+                    "sourcePort": "20_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_21_to_port_1",
+                    "sourceNode": "21",
+                    "sourcePort": "21_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                }
+            ],
+            "hash": "2fd2d5216aedc638dc7c648c47322b5ad86c24b8",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "warnings": {},
+                    "x": 1380,
+                    "y": -1.2789769243681803e-13
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "warnings": {},
+                    "x": 1550,
+                    "y": 788
+                },
+                "10": {
+                    "data": {
+                        "advanced": {
+                            "customName": "filter SOA email",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "<=",
+                                        "param": "iris_investigate:action_result.data.*.soa_email.*.count",
+                                        "value": "get_data_from_custom_list:custom_function:max_soa_email_count"
+                                    },
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": ">",
+                                        "param": "iris_investigate:action_result.data.*.soa_email.*.count",
+                                        "value": "1"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 5,
+                        "functionName": "filter_soa_email",
+                        "id": "10",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "10",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 1760,
+                    "y": 460
+                },
+                "11": {
+                    "data": {
+                        "advanced": {
+                            "customName": "filter IP address",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "<=",
+                                        "param": "iris_investigate:action_result.data.*.ip.*.address.count",
+                                        "value": "get_data_from_custom_list:custom_function:max_ip_address_count"
+                                    },
+                                    {
+                                        "op": ">",
+                                        "param": "iris_investigate:action_result.data.*.ip.*.address.count",
+                                        "value": "1"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 6,
+                        "functionName": "filter_ip_address",
+                        "id": "11",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "11",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 2100,
+                    "y": 460
+                },
+                "12": {
+                    "data": {
+                        "advanced": {
+                            "customName": "filter NS IP",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "<=",
+                                        "param": "iris_investigate:action_result.data.*.name_server.*.ip.*.count",
+                                        "value": "get_data_from_custom_list:custom_function:max_name_server_ip_count"
+                                    },
+                                    {
+                                        "op": ">",
+                                        "param": "iris_investigate:action_result.data.*.name_server.*.ip.*.count",
+                                        "value": "1"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 7,
+                        "functionName": "filter_ns_ip",
+                        "id": "12",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "12",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 2440,
+                    "y": 460
+                },
+                "13": {
+                    "data": {
+                        "advanced": {
+                            "customName": "filter MX IP",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "<=",
+                                        "param": "iris_investigate:action_result.data.*.mx.*.ip.*.count",
+                                        "value": "get_data_from_custom_list:custom_function:max_mx_ip_count"
+                                    },
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": ">",
+                                        "param": "iris_investigate:action_result.data.*.mx.*.ip.*.count",
+                                        "value": "1"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 8,
+                        "functionName": "filter_mx_ip",
+                        "id": "13",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "13",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 2780,
+                    "y": 460
+                },
+                "14": {
+                    "customCode": null,
+                    "data": {
+                        "action": "pivot action",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "pivot registrant name",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "DomainTools Iris Investigate",
+                        "connectorConfigs": [
+                            "domaintoolscreds"
+                        ],
+                        "connectorId": "f18b7ef9-0cbd-4dbb-b8ed-ce62e17f0603",
+                        "connectorVersion": "v1",
+                        "functionId": 2,
+                        "functionName": "pivot_registrant_name",
+                        "id": "14",
+                        "parameters": {
+                            "create_date": "",
+                            "data_updated_after": "",
+                            "expiration_date": "",
+                            "pivot_type": "registrant",
+                            "query_value": "filtered-data:filter_registrant_name:condition_1:iris_investigate:action_result.data.*.registrant_name.value",
+                            "status": "Any",
+                            "tld": ""
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "Any",
+                                "field": "status"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "pivot_type"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "query_value"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "14",
+                    "type": "action",
+                    "userCode": "\n    # Write your custom code here...\n\n",
+                    "warnings": {},
+                    "x": 340,
+                    "y": 640
+                },
+                "15": {
+                    "customCode": null,
+                    "data": {
+                        "action": "pivot action",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "pivot registrant org",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "DomainTools Iris Investigate",
+                        "connectorConfigs": [
+                            "domaintoolscreds"
+                        ],
+                        "connectorId": "f18b7ef9-0cbd-4dbb-b8ed-ce62e17f0603",
+                        "connectorVersion": "v1",
+                        "functionId": 3,
+                        "functionName": "pivot_registrant_org",
+                        "id": "15",
+                        "parameters": {
+                            "create_date": "",
+                            "data_updated_after": "",
+                            "expiration_date": "",
+                            "pivot_type": "registrant_org",
+                            "query_value": "filtered-data:filter_registrant_org:condition_1:iris_investigate:action_result.data.*.registrant_org.value",
+                            "status": "Any",
+                            "tld": ""
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "Any",
+                                "field": "status"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "pivot_type"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "query_value"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "15",
+                    "type": "action",
+                    "userCode": null,
+                    "warnings": {},
+                    "x": 680,
+                    "y": 640
+                },
+                "16": {
+                    "customCode": null,
+                    "data": {
+                        "action": "pivot action",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "pivot SSL org",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "DomainTools Iris Investigate",
+                        "connectorConfigs": [
+                            "domaintoolscreds"
+                        ],
+                        "connectorId": "f18b7ef9-0cbd-4dbb-b8ed-ce62e17f0603",
+                        "connectorVersion": "v1",
+                        "functionId": 4,
+                        "functionName": "pivot_ssl_org",
+                        "id": "16",
+                        "parameters": {
+                            "data_updated_after": "",
+                            "expiration_date": "",
+                            "pivot_type": "ssl_org",
+                            "query_value": "filtered-data:filter_ssl_org:condition_1:iris_investigate:action_result.data.*.ssl_info.*.organization.value",
+                            "status": "Any",
+                            "tld": ""
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "Any",
+                                "field": "status"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "pivot_type"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "query_value"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "16",
+                    "type": "action",
+                    "userCode": null,
+                    "warnings": {},
+                    "x": 1020,
+                    "y": 640
+                },
+                "17": {
+                    "customCode": null,
+                    "data": {
+                        "action": "pivot action",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "pivot SSL hash",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "DomainTools Iris Investigate",
+                        "connectorConfigs": [
+                            "domaintoolscreds"
+                        ],
+                        "connectorId": "f18b7ef9-0cbd-4dbb-b8ed-ce62e17f0603",
+                        "connectorVersion": "v1",
+                        "functionId": 5,
+                        "functionName": "pivot_ssl_hash",
+                        "id": "17",
+                        "parameters": {
+                            "data_updated_after": "",
+                            "expiration_date": "",
+                            "pivot_type": "ssl_hash",
+                            "query_value": "filtered-data:filter_ssl_hash:condition_1:iris_investigate:action_result.data.*.ssl_info.*.hash.value",
+                            "status": "Any",
+                            "tld": ""
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "Any",
+                                "field": "status"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "pivot_type"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "query_value"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "17",
+                    "type": "action",
+                    "userCode": null,
+                    "warnings": {},
+                    "x": 1380,
+                    "y": 640
+                },
+                "18": {
+                    "customCode": null,
+                    "data": {
+                        "action": "pivot action",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "pivot SOA email",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "DomainTools Iris Investigate",
+                        "connectorConfigs": [
+                            "domaintoolscreds"
+                        ],
+                        "connectorId": "f18b7ef9-0cbd-4dbb-b8ed-ce62e17f0603",
+                        "connectorVersion": "v1",
+                        "functionId": 6,
+                        "functionName": "pivot_soa_email",
+                        "id": "18",
+                        "parameters": {
+                            "create_date": "",
+                            "data_updated_after": "",
+                            "expiration_date": "",
+                            "pivot_type": "email",
+                            "query_value": "filtered-data:filter_soa_email:condition_1:iris_investigate:action_result.data.*.soa_email.*.value",
+                            "status": "Any"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "Any",
+                                "field": "status"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "pivot_type"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "query_value"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "18",
+                    "type": "action",
+                    "userCode": null,
+                    "warnings": {},
+                    "x": 1700,
+                    "y": 640
+                },
+                "19": {
+                    "customCode": null,
+                    "data": {
+                        "action": "pivot action",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "pivot IP address",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "DomainTools Iris Investigate",
+                        "connectorConfigs": [
+                            "domaintoolscreds"
+                        ],
+                        "connectorId": "f18b7ef9-0cbd-4dbb-b8ed-ce62e17f0603",
+                        "connectorVersion": "v1",
+                        "functionId": 7,
+                        "functionName": "pivot_ip_address",
+                        "id": "19",
+                        "parameters": {
+                            "create_date": "",
+                            "data_updated_after": "",
+                            "pivot_type": "ip",
+                            "query_value": "filtered-data:filter_ip_address:condition_1:iris_investigate:action_result.data.*.ip.*.address.value",
+                            "status": "Any",
+                            "tld": ""
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "Any",
+                                "field": "status"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "pivot_type"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "query_value"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "19",
+                    "type": "action",
+                    "userCode": null,
+                    "warnings": {},
+                    "x": 2040,
+                    "y": 640
+                },
+                "2": {
+                    "data": {
+                        "action": "lookup domain",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "Iris Investigate",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "DomainTools Iris Investigate",
+                        "connectorConfigs": [
+                            "domaintoolscreds"
+                        ],
+                        "connectorId": "f18b7ef9-0cbd-4dbb-b8ed-ce62e17f0603",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "iris_investigate",
+                        "id": "2",
+                        "parameters": {
+                            "domain": ""
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "field": "domain"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "2",
+                    "type": "action",
+                    "userCode": "\n    # Manually add the custom artifact datapath from this list. It should be in alphabetical order to make it work\n    datapaths = [\"artifact:*.cef.destinationDnsDomain\",\"artifact:*.cef.domain\",\"artifact:*.id\"]\n    \n    # Indices below are based on the position of the element in the `datapaths` variable above\n    DESTINATION_DNS_DOMAIN_ARTIFACT_INDEX = 0\n    DOMAIN_ARTIFACT_INDEX = 1\n    ARTIFACT_ID_INDEX = 2\n\n    container_artifact_data = phantom.collect2(container=container, datapath=datapaths)\n\n    # Empty `parameters` variable\n    parameters = []\n\n    # build parameters list for 'domain_reputation' call\n    for container_artifact_item in container_artifact_data:\n        if container_artifact_item[DESTINATION_DNS_DOMAIN_ARTIFACT_INDEX] is not None:\n            parameters.append({\n                \"domain\": container_artifact_item[DESTINATION_DNS_DOMAIN_ARTIFACT_INDEX],\n                \"context\": {'artifact_id': container_artifact_item[ARTIFACT_ID_INDEX]},\n            })\n        elif container_artifact_item[DOMAIN_ARTIFACT_INDEX] is not None:\n            parameters.append({\n                \"domain\": container_artifact_item[DOMAIN_ARTIFACT_INDEX],\n                \"context\": {'artifact_id': container_artifact_item[ARTIFACT_ID_INDEX]},\n            })\n",
+                    "warnings": {},
+                    "x": 1360,
+                    "y": 140
+                },
+                "20": {
+                    "customCode": null,
+                    "data": {
+                        "action": "pivot action",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "pivot NS IP",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "DomainTools Iris Investigate",
+                        "connectorConfigs": [
+                            "domaintoolscreds"
+                        ],
+                        "connectorId": "f18b7ef9-0cbd-4dbb-b8ed-ce62e17f0603",
+                        "connectorVersion": "v1",
+                        "functionId": 8,
+                        "functionName": "pivot_ns_ip",
+                        "id": "20",
+                        "parameters": {
+                            "create_date": "",
+                            "data_updated_after": "",
+                            "expiration_date": "",
+                            "pivot_type": "nameserver_ip",
+                            "query_value": "filtered-data:filter_ns_ip:condition_1:iris_investigate:action_result.data.*.name_server.*.ip.*.value",
+                            "status": "Any",
+                            "tld": ""
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "Any",
+                                "field": "status"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "pivot_type"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "query_value"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "20",
+                    "type": "action",
+                    "userCode": null,
+                    "warnings": {},
+                    "x": 2380,
+                    "y": 640
+                },
+                "21": {
+                    "customCode": null,
+                    "data": {
+                        "action": "pivot action",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "pivot MX IP",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "DomainTools Iris Investigate",
+                        "connectorConfigs": [
+                            "domaintoolscreds"
+                        ],
+                        "connectorId": "f18b7ef9-0cbd-4dbb-b8ed-ce62e17f0603",
+                        "connectorVersion": "v1",
+                        "functionId": 9,
+                        "functionName": "pivot_mx_ip",
+                        "id": "21",
+                        "parameters": {
+                            "create_date": "",
+                            "pivot_type": "mailserver_ip",
+                            "query_value": "filtered-data:filter_mx_ip:condition_1:iris_investigate:action_result.data.*.mx.*.ip.*.value",
+                            "status": "Any",
+                            "tld": ""
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "Any",
+                                "field": "status"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "pivot_type"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "query_value"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "21",
+                    "type": "action",
+                    "userCode": null,
+                    "warnings": {},
+                    "x": 2720,
+                    "y": 640
+                },
+                "3": {
+                    "data": {
+                        "advanced": {
+                            "customName": "get_data_from_custom_list",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "get_data_from_custom_list",
+                        "id": "3",
+                        "inputParameters": [],
+                        "outputVariables": [
+                            "max_registrant_contact_name_count",
+                            "max_registrant_org_count",
+                            "max_ssl_info_organization_count",
+                            "max_ssl_info_hash_count",
+                            "max_name_server_host_count",
+                            "max_soa_email_count",
+                            "max_ip_address_count",
+                            "max_name_server_ip_count",
+                            "max_mx_ip_count"
+                        ],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "3",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n    success, message, domaintools_guided_pivot_list = phantom.get_list(list_name='domaintools_guided_pivot')\n    for data in domaintools_guided_pivot_list:\n        key = data[0]\n        value = data[1]\n        \n        if key == \"max_registrant_contact_name_count\":\n            get_data_from_custom_list__max_registrant_contact_name_count = value\n        elif key == \"max_registrant_org_count\":\n            get_data_from_custom_list__max_registrant_org_count = value\n        elif key == \"max_ssl_info_organization_count\":\n            get_data_from_custom_list__max_ssl_info_organization_count = value\n        elif key == \"max_ssl_info_hash_count\":\n            get_data_from_custom_list__max_ssl_info_hash_count = value\n        elif key == \"max_name_server_host_count\":\n            get_data_from_custom_list__max_name_server_host_count = value\n        elif key == \"max_soa_email_count\":\n            get_data_from_custom_list__max_soa_email_count = value\n        elif key == \"max_ip_address_count\":\n            get_data_from_custom_list__max_ip_address_count = value\n        elif key == \"max_name_server_ip_count\":\n            get_data_from_custom_list__max_name_server_ip_count = value\n        elif key == \"max_mx_ip_count\":\n            get_data_from_custom_list__max_mx_ip_count = value\n\n",
+                    "warnings": {},
+                    "x": 1360,
+                    "y": 299.9999999999999
+                },
+                "4": {
+                    "data": {
+                        "advanced": {
+                            "customName": "decision_ns_domain",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "<=",
+                                        "param": "iris_investigate:action_result.data.*.name_server.*.host.count",
+                                        "value": "get_data_from_custom_list:custom_function:max_name_server_host_count"
+                                    },
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": ">",
+                                        "param": "iris_investigate:action_result.data.*.name_server.*.host.count",
+                                        "value": "1"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            }
+                        ],
+                        "functionId": 1,
+                        "functionName": "decision_ns_domain",
+                        "id": "4",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "4",
+                    "type": "decision",
+                    "warnings": {},
+                    "x": 80,
+                    "y": 460
+                },
+                "5": {
+                    "data": {
+                        "action": "pivot action",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "customName": "pivot ns hostname",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "DomainTools Iris Investigate",
+                        "connectorConfigs": [
+                            "domaintoolscreds"
+                        ],
+                        "connectorId": "f18b7ef9-0cbd-4dbb-b8ed-ce62e17f0603",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "pivot_ns_hostname",
+                        "id": "5",
+                        "parameters": {
+                            "create_date": "",
+                            "expiration_date": "",
+                            "pivot_type": "nameserver_host",
+                            "query_value": "iris_investigate:action_result.data.*.name_server.*.host.value",
+                            "status": "Any",
+                            "tld": ""
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "Any",
+                                "field": "status"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "pivot_type"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "query_value"
+                            }
+                        ],
+                        "tab": "byConnector",
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "5",
+                    "type": "action",
+                    "warnings": {},
+                    "x": 0,
+                    "y": 640
+                },
+                "6": {
+                    "data": {
+                        "advanced": {
+                            "customName": "filter registrant name",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "<=",
+                                        "param": "iris_investigate:action_result.data.*.registrant_contact.name.count",
+                                        "value": "get_data_from_custom_list:custom_function:max_registrant_contact_name_count"
+                                    },
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": ">",
+                                        "param": "iris_investigate:action_result.data.*.registrant_contact.name.count",
+                                        "value": "1"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 1,
+                        "functionName": "filter_registrant_name",
+                        "id": "6",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "6",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 400,
+                    "y": 460
+                },
+                "7": {
+                    "data": {
+                        "advanced": {
+                            "customName": "filter registrant org",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "<=",
+                                        "param": "iris_investigate:action_result.data.*.registrant_org.count",
+                                        "value": "get_data_from_custom_list:custom_function:max_registrant_org_count"
+                                    },
+                                    {
+                                        "op": ">",
+                                        "param": "iris_investigate:action_result.data.*.registrant_org.count",
+                                        "value": "1"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 2,
+                        "functionName": "filter_registrant_org",
+                        "id": "7",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "7",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 740,
+                    "y": 460
+                },
+                "8": {
+                    "data": {
+                        "advanced": {
+                            "customName": "filter SSL org",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "<=",
+                                        "param": "iris_investigate:action_result.data.*.ssl_info.*.organization.count",
+                                        "value": "get_data_from_custom_list:custom_function:max_ssl_info_organization_count"
+                                    },
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": ">",
+                                        "param": "iris_investigate:action_result.data.*.ssl_info.*.organization.count",
+                                        "value": "1"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 3,
+                        "functionName": "filter_ssl_org",
+                        "id": "8",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "8",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 1080,
+                    "y": 460
+                },
+                "9": {
+                    "data": {
+                        "advanced": {
+                            "customName": "filter SSL hash",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "<=",
+                                        "param": "iris_investigate:action_result.data.*.ssl_info.*.hash.count",
+                                        "value": "get_data_from_custom_list:custom_function:max_ssl_info_hash_count"
+                                    },
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": ">",
+                                        "param": "iris_investigate:action_result.data.*.ssl_info.*.hash.count",
+                                        "value": "1"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 4,
+                        "functionName": "filter_ssl_hash",
+                        "id": "9",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "9",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 1420,
+                    "y": 460
+                }
+            },
+            "notes": "Create a custom list with the name: \ndomaintools_guided_pivot\n\nThis holds a list of pivot values for each of the pivots that the PB runs, the names need to be the same, and the integer pivot values can be configured: \ncolumn1 | column2\nmax_registrant_contact_name_count | 200\nmax_registrant_org_count\t| 200\nmax_ssl_info_organization_count | 200\nmax_ssl_info_hash_count\t| 350\nmax_name_server_host_count\t| 200\nmax_soa_email_count | 200\nmax_ip_address_count | 150\nmax_name_server_ip_count | 250\nmax_mx_ip_count | 200"
+        },
+        "input_spec": null,
+        "output_spec": null,
+        "playbook_type": "automation",
+        "python_version": "3",
+        "schema": "5.0.8",
+        "version": "5.5.0.108488"
+    },
+    "create_time": "2023-03-30T18:21:37.953082+00:00",
+    "draft_mode": false,
+    "labels": [
+        "events"
+    ],
+    "tags": []
+}
