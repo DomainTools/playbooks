@@ -1,0 +1,168 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Uncategorized",
+    "coa": {
+        "data": {
+            "description": "NOD feeds playbook",
+            "edges": [
+                {
+                    "id": "port_0_to_port_2",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
+                },
+                {
+                    "id": "port_2_to_port_3",
+                    "sourceNode": "2",
+                    "sourcePort": "2_out",
+                    "targetNode": "3",
+                    "targetPort": "3_in"
+                },
+                {
+                    "id": "port_3_to_port_1",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                }
+            ],
+            "hash": "431e2072cc3da5926bc28e7560416c08f99b91cc",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "warnings": {},
+                    "x": 19.999999999999986,
+                    "y": -1.2789769243681803e-13
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "warnings": {},
+                    "x": 19.999999999999986,
+                    "y": 443.9999999999998
+                },
+                "2": {
+                    "data": {
+                        "action": "noh feed",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "join": []
+                        },
+                        "connector": "DomainTools Iris Investigate",
+                        "connectorConfigs": [
+                            "domaintoolscreds"
+                        ],
+                        "connectorId": "f18b7ef9-0cbd-4dbb-b8ed-ce62e17f0603",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "noh_feed_1",
+                        "id": "2",
+                        "loop": {
+                            "conditions": [
+                                {
+                                    "comparisons": [
+                                        {
+                                            "conditionIndex": 0,
+                                            "op": "==",
+                                            "param": "",
+                                            "value": ""
+                                        }
+                                    ],
+                                    "conditionIndex": 0,
+                                    "display": "If",
+                                    "logic": "and",
+                                    "type": "if"
+                                }
+                            ],
+                            "enabled": false,
+                            "exitAfterUnit": "m",
+                            "exitAfterValue": 10,
+                            "exitConditionEnabled": false,
+                            "exitLoopAfter": 2,
+                            "pauseUnit": "m",
+                            "pauseValue": 2
+                        },
+                        "parameters": {
+                            "after": "-60",
+                            "session_id": ""
+                        },
+                        "requiredParameters": [],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "2",
+                    "type": "action",
+                    "warnings": {},
+                    "x": 0,
+                    "y": 148
+                },
+                "3": {
+                    "customCode": null,
+                    "data": {
+                        "advanced": {
+                            "customName": "output NOH list",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "output_noh_list",
+                        "id": "3",
+                        "inputParameters": [
+                            "noh_feed_1:action_result.data"
+                        ],
+                        "outputVariables": [],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "3",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n    from datetime import datetime\n    import csv\n     \n    event_name = container.get(\"name\")\n    file_name = f\"domaintools_feed_noh_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv\"\n    phantom.debug(f\"dt debug - exporting NOH list to {file_name} file.\")\n    \n    with open(f\"/opt/phantom/vault/tmp/{file_name}\", \"w\", newline='') as report_csv_file:\n        headers = [\"domain\", \"timestamp\"]\n        writer = csv.DictWriter(report_csv_file, fieldnames=headers)\n        \n        writer.writeheader()\n        for data in noh_feed_1_result_item_0[0] or []:\n            writer.writerow(data)\n\n    success, message, vault_id = phantom.vault_add(container=container, file_location=f\"/opt/phantom/vault/tmp/{file_name}\", file_name=file_name)\n    \n    if not success:\n        phantom.error(f\"dt error - Error creating {file_name} file. Message: {message}\")\n        return\n    \n\n",
+                    "warnings": {},
+                    "x": 0,
+                    "y": 300
+                }
+            },
+            "notes": "",
+            "origin": {
+                "playbook_id": 342,
+                "playbook_name": "DomainTools Feeds NOD",
+                "playbook_repo_id": 2,
+                "playbook_repo_name": "local"
+            }
+        },
+        "input_spec": null,
+        "output_spec": null,
+        "playbook_trigger": "artifact_created",
+        "playbook_type": "automation",
+        "python_version": "3",
+        "schema": "5.0.17",
+        "version": "6.4.0.90"
+    },
+    "create_time": "2025-05-19T16:32:25.408056+00:00",
+    "draft_mode": false,
+    "labels": [
+        "events"
+    ],
+    "tags": []
+}
